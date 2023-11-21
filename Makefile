@@ -1,17 +1,17 @@
-int-frontend:
- make -C frontend lint
+lint-frontend:
+	make -C frontend lint
 
 install:
- npm ci
+	npm ci
 
 start-frontend:
- make -C frontend start
+	make -C frontend start
 
 start-backend:
- npx start-server
+	npx start-server
 
 deploy:
- git push heroku main
+	git push heroku main
 
 start:
- make start-backend & make start-frontend
+	make start-backend & make start-frontend
