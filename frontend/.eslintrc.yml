@@ -4,7 +4,6 @@ env:
 
 extends:
   - airbnb-base
-  - airbnb
   - plugin:functional/recommended
   - plugin:react/recommended
   - plugin:react-hooks/recommended

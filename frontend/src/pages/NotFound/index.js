@@ -1,2 +1,3 @@
-import NotFound from "./NotFound.jsx";
-export {NotFound};
+import NotFound from './NotFound.jsx';
+
+export { NotFound };

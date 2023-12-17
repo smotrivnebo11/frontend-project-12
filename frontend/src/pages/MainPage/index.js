@@ -1,2 +1,3 @@
-import MainPage from "./MainPage.jsx";
-export {MainPage};
+import MainPage from './MainPage.jsx';
+
+export { MainPage };

@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { Button, Card, Col, Container, Form, FloatingLabel, Row } from 'react-bootstrap';
+import {
+  Button, Form, Col, Card, Row,
+} from 'react-bootstrap';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import avatarImagePath from '../../assets/loginPage.jpeg';
 import useAuth from '../../hooks/index.jsx';
@@ -39,7 +41,7 @@ const LoginPage = () => {
       username: '',
       password: '',
     },
-    //validationSchema: validationSchema,
+    // validationSchema: validationSchema,
     onSubmit: async (values) => {
       setAuthFailed(false);
 
@@ -129,7 +131,7 @@ const LoginPage = () => {
               <div className="text-center">
                 <span>Нет аккаунта?</span>
                 {' '}
-                <NavLink to="/login">Регистрация</NavLink>
+                <NavLink to="/signup">Регистрация</NavLink>
               </div>
             </Card.Footer>
           </Card>
