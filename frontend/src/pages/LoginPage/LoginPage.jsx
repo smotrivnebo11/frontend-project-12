@@ -17,19 +17,19 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const input = useRef(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem('user');
-    if (token) {
-      auth.loggedIn = true;
-    }
-    auth.loggedIn = false;
-    navigate('/login');
-    input.current.focus();
-  }, []);
-
   // useEffect(() => {
+  //   const token = localStorage.getItem('user');
+  //   if (token) {
+  //     auth.loggedIn = true;
+  //   }
+  //   auth.loggedIn = false;
+  //   navigate('/login');
   //   input.current.focus();
   // }, []);
+
+  useEffect(() => {
+    input.current.focus();
+  }, []);
 
   const validationSchema = yup.object().shape({
     username: yup.string().trim().required('Обязательное поле'),
@@ -41,28 +41,22 @@ const LoginPage = () => {
       username: '',
       password: '',
     },
-    // validationSchema: validationSchema,
+
     onSubmit: async (values) => {
       setAuthFailed(false);
 
       try {
         const { data } = await axios.post(routes.loginPath(), values);
         localStorage.setItem('user', JSON.stringify(data.token));
-        navigate('/');
-
-        // const res = await axios.post(routes.loginPath(), values);
-        // const logIn = (data) => {
-        //   localStorage.setItem('user', JSON.stringify(data));
-        //   setUser(data);
-        // };
-        // localStorage.setItem('userId', JSON.stringify(res.data));
-        // auth.logIn();
+        auth.logIn();
+        setAuthFailed(false);
         const { from } = location.state || { from: { pathname: '/' } };
         navigate(from);
       } catch (err) {
         formik.setSubmitting(false);
         if (err.isAxiosError && err.response.status === 401) {
           setAuthFailed(true);
+          navigate('/login');
           input.current.select();
           return;
         }
