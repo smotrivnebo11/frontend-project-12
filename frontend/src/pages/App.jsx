@@ -1,5 +1,5 @@
 /* eslint-disable functional/no-expression-statements */
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -8,14 +8,14 @@ import {
   Navigate,
   useLocation,
 } from 'react-router-dom';
-import { Button, Navbar, Container } from 'react-bootstrap';
+import { Navbar, Container, Button } from 'react-bootstrap';
 import AuthContext from '../contexts/index.jsx';
-import useAuth from '../hooks/auth.jsx';
-import routes from '../routes.js';
+import useAuth from '../hooks/index.jsx';
+import routes from '../routes/routes.js';
 import { MainPage } from './MainPage';
 import { LoginPage } from './LoginPage';
 import { NotFound } from './NotFound';
-// import { SignUpPage } from './SignUp/SignUp';
+import { SignUp } from './SignUp';
 
 const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -48,41 +48,39 @@ const AuthButton = () => {
   const auth = useAuth();
 
   return auth.loggedIn
-    ? <Button onClick={auth.logOut}>Выйти</Button>
+    ? <Button onClick={auth.logOut}>Выход</Button>
     : '';
 };
 
-// eslint-disable-next-line arrow-body-style
-const App = () => {
-  return (
-    <AuthProvider>
-      <div className="d-flex flex-column h-100">
-        <Router>
+const App = () => (
+  <AuthProvider>
+    <div className="d-flex flex-column h-100">
+      <Router>
 
-          <Navbar expand="lg" variant="light" bg="white" className="shadow-sm">
-            <Container>
-              <Navbar.Brand as={Link} to="/">{t('name')}</Navbar.Brand>
-              <AuthButton />
-            </Container>
-          </Navbar>
+        <Navbar expand="lg" variant="light" bg="white" className="shadow-sm">
+          <Container>
+            <Navbar.Brand as={Link} to="/">Hexlet Chat</Navbar.Brand>
+            <AuthButton />
+          </Container>
+        </Navbar>
 
-          <Routes>
-            <Route
-              path={routes.chatPagePath()}
-              element={(
-                <PrivateRoute>
-                  <MainPage />
-                </PrivateRoute>
-              )}
-            />
-            <Route path={routes.loginPagePath()} element={<LoginPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+        <Routes>
+          <Route
+            path={routes.mainPagePath()}
+            element={(
+              <PrivateRoute>
+                <MainPage />
+              </PrivateRoute>
+            )}
+          />
+          <Route path={routes.loginPagePath()} element={<LoginPage />} />
+          <Route path={routes.notFoundPath()} element={<NotFound />} />
+          <Route path={routes.signupPagePath()} element={<SignUp />} />
+        </Routes>
 
-        </Router>
-      </div>
-    </AuthProvider>
-  );
-};
+      </Router>
+    </div>
+  </AuthProvider>
+);
 
 export default App;
