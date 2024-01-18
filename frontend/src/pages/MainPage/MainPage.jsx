@@ -9,7 +9,7 @@ import Channels from '../chatComponents/Channels.jsx';
 import Messages from '../chatComponents/Messages.jsx';
 
 const MainPage = () => {
-  const { token } = JSON.parse(localStorage.getItem('userId'));
+  const { token } = JSON.parse(localStorage.getItem('user'));
   const dispatch = useDispatch();
 
   useEffect(() => {
