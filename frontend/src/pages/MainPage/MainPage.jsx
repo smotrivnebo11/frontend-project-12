@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import fetchData from '../../slices/channelsSlice.js';
+import { actions as channelsActions } from '../../slices/channelsSlice.js';
 
 import Channels from '../chatComponents/Channels.jsx';
 import Messages from '../chatComponents/Messages.jsx';
@@ -13,7 +13,7 @@ const MainPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchData(token));
+    dispatch(channelsActions.fetchData(token));
   }, [dispatch, token]);
 
   return (
