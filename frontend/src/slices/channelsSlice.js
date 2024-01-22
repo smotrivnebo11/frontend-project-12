@@ -3,7 +3,6 @@
 
 import axios from 'axios';
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
-
 import routes from '../routes/routes.js';
 
 const fetchData = createAsyncThunk(
@@ -18,9 +17,17 @@ const fetchData = createAsyncThunk(
   },
 );
 
+const generalChannelId = 1;
+
+// const initialState = {
+//   loading: false,
+//   channels: [],
+//   currentChannelId: generalChanelId,
+// };
+
 const channelsAdapter = createEntityAdapter();
 
-const initialState = { loading: false, channels: [], currentChannelId: null };
+const initialState = channelsAdapter.getInitialState({ currentChannelId: generalChannelId });
 
 const channelsSlice = createSlice({
   name: 'channels',
@@ -75,6 +82,8 @@ const actions = {
   fetchData,
 };
 
+export const selectors = channelsAdapter.getSelectors((state) => state.channels);
 export { actions };
+export { channelsAdapter };
 // export const { addChannel } = channelsSlice.actions;
 export default channelsSlice.reducer;
