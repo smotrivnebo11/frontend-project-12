@@ -139,7 +139,6 @@
 
 // export default LoginPage;
 
-import * as yup from 'yup';
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
@@ -153,15 +152,11 @@ import {
 } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import useAuth from '../../../hooks/index.jsx';
+import useAuth from '../../../hooks/index.js';
 
+import { loginSchema } from '../../../validation/validationSchema.js';
 import loginImg from '../../../assets/loginPage.jpeg';
 import routes from '../../../routes/routes.js';
-
-const loginSchema = yup.object().shape({
-  name: yup.string().required(),
-  password: yup.string().required(),
-});
 
 const LoginPage = () => {
   const inputNameRef = useRef();

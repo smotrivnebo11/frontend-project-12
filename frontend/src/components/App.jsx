@@ -101,8 +101,8 @@ import {
 import { Button, Navbar, Container } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import AuthContext from '../contexts/index.jsx';
-import useAuth from '../hooks/index.jsx';
+import AuthContext from '../contexts/index.js';
+import useAuth from '../hooks/index.js';
 import routes from '../routes/routes.js';
 
 import { ChatPage } from './pages/ChatPage/index.js';

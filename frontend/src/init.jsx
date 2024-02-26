@@ -1,38 +1,4 @@
 /* eslint-disable functional/no-expression-statements */
-// import React from 'react';
-// import io from 'socket.io-client';
-// import ReactDOM from 'react-dom/client';
-// import { Provider } from 'react-redux';
-// // import { configureStore } from '@reduxjs/toolkit';
-// import store from './slices/store';
-
-// import App from './components/App.jsx';
-// import { AuthProvider } from './contexts/AuthProvider.jsx';
-// // import reducer from './slices/store.js';
-// import SocketContextProvider from './contexts/socket.jsx';
-
-// const init = async () => {
-//   const root = ReactDOM.createRoot(document.getElementById('root'));
-//   const socket = io('/', { autoConnect: false });
-
-//   // const store = configureStore({
-//   //   reducer,
-//   // });
-
-//   return root.render(
-//     <Provider store={store}>
-//       <AuthProvider>
-//         <SocketContextProvider socket={socket}>
-//           <App />
-//         </SocketContextProvider>
-//       </AuthProvider>
-//     </Provider>,
-//   );
-// };
-
-// export default init;
-
-/* eslint-disable functional/no-expression-statements */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import i18next from 'i18next';
@@ -47,6 +13,7 @@ import socketApi from './socketApi/api.js';
 import SocketProvider from './contexts/SocketProvider.jsx';
 
 const init = async () => {
+  // const api = socketApi();
   const socket = io();
   const api = socketApi(socket);
   const i18n = i18next.createInstance();
