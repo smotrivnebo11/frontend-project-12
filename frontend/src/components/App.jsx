@@ -105,8 +105,9 @@ import AuthContext from '../contexts/index.js';
 import useAuth from '../hooks/index.js';
 import routes from '../routes/routes.js';
 
-import { ChatPage } from './pages/ChatPage/index.js';
+import { SignUpPage } from './pages/SignUpPage/index.js';
 import { LoginPage } from './pages/LoginPage/index.js';
+import { ChatPage } from './pages/ChatPage/index.js';
 import { NotFoundPage } from './pages/NotFoundPage/index.js';
 
 const AuthProvider = ({ children }) => {
@@ -169,7 +170,8 @@ const App = () => {
               )}
             />
             <Route path={routes.loginPagePath()} element={<LoginPage />} />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path={routes.signupPagePath()} element={<SignUpPage />} />
+            <Route path={routes.notFoundPath()} element={<NotFoundPage />} />
           </Routes>
 
         </Router>
