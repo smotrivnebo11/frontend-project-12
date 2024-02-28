@@ -140,6 +140,7 @@
 // export default LoginPage;
 
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import React, { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { useNavigate, Link } from 'react-router-dom';
@@ -189,10 +190,16 @@ const LoginPage = () => {
       } catch (err) {
         formik.setSubmitting(false);
 
-        if (err.isAxiosError && err.response.status === 401) {
-          setAuthFailed(true);
-          navigate('/login');
-          inputNameRef.current.select();
+        if (err.isAxiosError) {
+          if (err.response.status === 401) {
+            setAuthFailed(true);
+            navigate('/login');
+            inputNameRef.current.select();
+          } else {
+            toast.error(t('errors.network'));
+          }
+        } else {
+          toast.error(err.message);
         }
       }
     },
@@ -205,10 +212,10 @@ const LoginPage = () => {
           <Card className="shadow-sm">
             <Card.Body className="row p-5">
               <Col xs={12} md={6} className="d-flex align-items-center justify-content-center">
-                <img src={loginImg} className="rounded-circle" alt={t('entry')} />
+                <img src={loginImg} className="rounded-circle" alt={t('enter')} />
               </Col>
               <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
-                <h1 className="text-center mb-4">{t('entry')}</h1>
+                <h1 className="text-center mb-4">{t('enter')}</h1>
 
                 <Form.Floating className="mb-3">
                   <Form.Control
@@ -247,7 +254,7 @@ const LoginPage = () => {
                   className="w-100 mb-3"
                   disabled={formik.isSubmitting}
                 >
-                  {t('entry')}
+                  {t('enter')}
                 </Button>
 
               </Form>

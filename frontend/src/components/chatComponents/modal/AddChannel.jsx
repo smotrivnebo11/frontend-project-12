@@ -1,5 +1,6 @@
 /* eslint-disable functional/no-expression-statements */
 import React, { useRef, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -32,6 +33,7 @@ const AddChannel = () => {
       addNewChannel({ name: values.channelName });
       formik.resetForm();
       dispatch(closeModal());
+      toast.success(t('success.newChannel'));
     },
   });
 

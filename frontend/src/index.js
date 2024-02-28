@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 /* eslint-disable functional/no-expression-statements */
 import './index.css';
+import 'react-toastify/dist/ReactToastify.css';
 import initApp from './init.jsx';
 
 initApp();
