@@ -1,9 +1,9 @@
 export default {
   translation: {
     name: 'Hexlet Chat',
-    entry: 'Войти', // enter
+    enter: 'Войти',
     exit: 'Выйти',
-    registration: 'Регистрация', // sign up
+    registration: 'Регистрация',
     makeRegistration: 'Зарегистрироваться',
     noAccount: 'Нет аккаунта?',
     invalidFeedback: 'Неверные имя пользователя или пароль',
