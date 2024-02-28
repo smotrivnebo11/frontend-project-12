@@ -53,6 +53,7 @@
 // export default Messages;
 
 import React, { useRef, useEffect } from 'react';
+import filter from 'leo-profanity';
 import { Button, Col, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -114,7 +115,7 @@ const Messages = () => {
       <div className="d-flex flex-column h-100">
         <div className="bg-light mb-4 p-3 shadow-sm small">
           <p className="m-0">
-            <b>{`# ${currentChannelName}`}</b>
+            <b>{`# ${filter.clean(currentChannelName)}`}</b>
           </p>
           <span className="text-muted">
             {t('messagesCounter.messages', { count: currentMessagesLength })}
@@ -125,8 +126,8 @@ const Messages = () => {
             ? ''
             : currentMessages.map((el) => (
               <div className="text-break mb-2" key={el.id}>
-                <b>{el.username}</b>
-                {`: ${el.body}`}
+                <b>{filter.clean(el.username)}</b>
+                {`: ${filter.clean(el.body)}`}
               </div>
             ))}
         </div>

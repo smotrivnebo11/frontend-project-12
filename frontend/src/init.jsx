@@ -1,5 +1,6 @@
 /* eslint-disable functional/no-expression-statements */
 import React from 'react';
+import filter from 'leo-profanity';
 import ReactDOM from 'react-dom/client';
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
@@ -21,6 +22,8 @@ const init = async () => {
   await i18n
     .use(initReactI18next)
     .init({ resources, fallbackLng: 'ru' });
+
+  filter.add(filter.getDictionary('ru'));
 
   const root = ReactDOM.createRoot(document.getElementById('root'));
 
