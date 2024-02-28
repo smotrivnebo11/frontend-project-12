@@ -51,7 +51,7 @@ const SignupPage = () => {
           username: values.username,
           password: values.password,
         });
-        localStorage.setItem('userdatas', JSON.stringify(res.data));
+        localStorage.setItem('userdata', JSON.stringify(res.data));
         auth.logIn();
         setRegistrationFailed(false);
         navigate('/');
