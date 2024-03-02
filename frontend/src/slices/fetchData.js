@@ -7,6 +7,7 @@ const fetchData = createAsyncThunk(
   'data/fetchData',
   async (token) => {
     const { data } = await axios.get(routes.dataPath(), { headers: { Authorization: `Bearer ${token}` } });
+    // Bearer-токен - токен на предъявителя
 
     return data;
   },

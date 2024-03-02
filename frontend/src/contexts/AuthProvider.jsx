@@ -32,21 +32,22 @@
 
 // export default UserDataContextProvider;
 
-import React, { useState } from 'react';
-import { AuthContext } from '.';
+import React, { useState, useMemo } from 'react';
+
+import AuthContext from './index.js';
 
 const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const logIn = () => setLoggedIn(true);
   const logOut = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem('userdata');
     setLoggedIn(false);
   };
 
-  return (
-    <AuthContext.Provider value={{ loggedIn, logIn, logOut }}>{children}</AuthContext.Provider>
-  );
+  const memoAuth = useMemo(() => ({ loggedIn, logIn, logOut }), [loggedIn]);
+
+  return <AuthContext.Provider value={memoAuth}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

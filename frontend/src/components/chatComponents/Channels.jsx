@@ -9,7 +9,7 @@ import {
   Dropdown,
 } from 'react-bootstrap';
 
-import getModal from './modal/index.js';
+import getModal from './modals/index.js';
 import { changeCurrentChannel } from '../../slices/channelsSlice.js';
 import { openModal } from '../../slices/modalSlice.js';
 
