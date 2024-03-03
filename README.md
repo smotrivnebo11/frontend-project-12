@@ -6,6 +6,7 @@ https://hexlet-chat-uftm.onrender.com
 ## Hexlet Chat
 
 Hexlet Chat is a simplified version of Slack, where you can send and receive messages in real time, create, delete and rename channels.
+
 In this chat you receive pop-up notifications of user actions, obscene words are hidden by ***. 
 
 ![Chat-img](frontend/src/assets/readmepic.png)
@@ -41,6 +42,7 @@ In this chat you receive pop-up notifications of user actions, obscene words are
  1. git clone https://github.com/smotrivnebo11/frontend-project-12
  2. make install
  3. make start
+ ```
 
 ## Tech stack
 
