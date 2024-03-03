@@ -27,7 +27,9 @@ const Channels = () => {
     if (modalType === '') {
       return null;
     }
+
     const Component = getModal(modalType);
+
     return <Component />;
   };
 
@@ -57,6 +59,7 @@ const Channels = () => {
         {channels.map((el) => (
           <li className="nav-item w-100" key={el.id}>
             <ButtonGroup className="d-flex show dropdown">
+
               <Button
                 onClick={() => handleChangeClick(el.id)}
                 variant={el.id === currentChannelId ? 'secondary' : 'light'}
@@ -77,6 +80,7 @@ const Channels = () => {
                   </Dropdown.Menu>
                 </Dropdown>
               )}
+
             </ButtonGroup>
           </li>
         ))}

@@ -1,59 +1,6 @@
-// import { Col } from 'react-bootstrap';
-// import { useSelector } from 'react-redux';
-// import { getAllChannels, getCurrentChannelId, getMessages } from '../../slices/selectors.js';
-
-// import MessagesHeader from './MessagesHeader.jsx';
-
-// const Messages = () => {
-//   const messages = useSelector(getMessages);
-//   const channels = useSelector(getAllChannels);
-//   const currentChannelId = useSelector(getCurrentChannelId);
-//   // const { channels, currentChannelId } = useSelector((state) => state.channels);
-
-//   const currentChannelName = channels.length !== 0
-//     ? channels.find((el) => el.id === currentChannelId).name
-//     : '';
-
-//   // const { messages } = useSelector((state) => state.messages);
-
-//   const currentMessages = messages.filter((el) => el.channelId === currentChannelId);
-//   const currentMessagesLength = currentMessages
-//     ? currentMessages.length
-//     : 0;
-
-//   const a = 'some message';
-//   return (
-//     <Col className="p-0 h-100">
-//       <div className="d-flex flex-column h-100">
-//         <MessagesHeader />
-//         {a}
-//         <div className="bg-light mb-4 p-3 shadow-sm small">
-//           <p className="m-0">
-//             <b>{`# ${currentChannelName}`}</b>
-//           </p>
-//           <span className="text-muted">
-//             {{ count: currentMessagesLength }}
-//           </span>
-//         </div>
-//         <div id="messages-box" className="chat-messages overflow-auto px-5">
-//           {currentMessagesLength === 0
-//             ? ''
-//             : messages.map((el) => (
-//               <div className="text-break mb-2" key={el.id}>
-//                 <b>{el.username}</b>
-//                 {`: ${el.body}`}
-//               </div>
-//             ))}
-//         </div>
-//       </div>
-//     </Col>
-//   );
-// };
-
-// export default Messages;
-
 import React, { useRef, useEffect } from 'react';
 import filter from 'leo-profanity';
+import { toast } from 'react-toastify';
 import { Button, Col, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -72,6 +19,7 @@ const Messages = () => {
   }, []);
 
   const { channels, currentChannelId } = useSelector((state) => state.channels);
+  const { messages } = useSelector((state) => state.messages);
 
   const currentChannel = channels.length !== 0
     ? channels.find((el) => el.id === currentChannelId)
@@ -81,30 +29,31 @@ const Messages = () => {
     ? currentChannel.name
     : '';
 
-  const { messages } = useSelector((state) => state.messages);
   const currentMessages = messages.filter((el) => el.channelId === currentChannelId);
   const currentMessagesLength = currentMessages
     ? currentMessages.length
     : 0;
 
   const formik = useFormik({
-    initialValues: {
-      body: '',
-    },
+    initialValues: { body: '' },
     validationSchema: chatSchema(t('messageBody')),
+
     onSubmit: (values) => {
       const { body } = values;
       const { username } = JSON.parse(localStorage.getItem('userdata'));
 
-      // eslint-disable-next-line functional/no-conditional-statements
       if (body) {
         const newMessage = {
           body,
           channelId: currentChannelId,
           username,
         };
-        addNewMessage(newMessage);
-        formik.resetForm();
+        try {
+          addNewMessage(newMessage);
+          formik.resetForm();
+        } catch (err) {
+          toast.error(t('errors.message'));
+        }
       }
       inputMessage.current.focus();
     },
@@ -115,7 +64,8 @@ const Messages = () => {
       <div className="d-flex flex-column h-100">
         <div className="bg-light mb-4 p-3 shadow-sm small">
           <p className="m-0">
-            <b>{`# ${filter.clean(currentChannelName)}`}</b>
+            <b># </b>
+            <b>{filter.clean(currentChannelName)}</b>
           </p>
           <span className="text-muted">
             {t('messagesCounter.messages', { count: currentMessagesLength })}
@@ -127,7 +77,8 @@ const Messages = () => {
             : currentMessages.map((el) => (
               <div className="text-break mb-2" key={el.id}>
                 <b>{filter.clean(el.username)}</b>
-                {`: ${filter.clean(el.body)}`}
+                {': '}
+                {filter.clean(el.body)}
               </div>
             ))}
         </div>

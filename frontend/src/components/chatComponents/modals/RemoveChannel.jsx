@@ -1,9 +1,8 @@
-/* eslint-disable functional/no-expression-statements */
 import React from 'react';
 import { toast } from 'react-toastify';
-import { Modal, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { Modal, Button } from 'react-bootstrap';
 
 import { useSocket } from '../../../hooks/index.js';
 import { closeModal } from '../../../slices/modalSlice.js';
@@ -19,9 +18,13 @@ const RemoveChannel = () => {
   const handleClose = () => dispatch(closeModal());
 
   const handleRemove = (id) => {
-    removeChannel(id);
-    dispatch(closeModal());
-    toast.success(t('success.removeChannel'));
+    try {
+      removeChannel(id);
+      dispatch(closeModal());
+      toast.success(t('success.removeChannel'));
+    } catch (err) {
+      toast.error(t('errors.channelRemove'));
+    }
   };
 
   return (

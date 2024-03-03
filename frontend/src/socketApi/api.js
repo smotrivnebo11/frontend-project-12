@@ -1,9 +1,5 @@
-/* eslint-disable functional/no-conditional-statements */
-/* eslint-disable functional/no-expression-statements */
-import { io } from 'socket.io-client';
 import { toast } from 'react-toastify';
 
-import store from '../slices/store.js';
 import { addMessage, removeAllChannelMessages } from '../slices/messagesSlice.js';
 import {
   addChannel,
@@ -12,10 +8,8 @@ import {
   renameChannel as renameChannelById,
 } from '../slices/channelsSlice.js';
 
-const socketApi = () => {
-  const socket = io();
+const socketApi = (socket, store) => {
   const { dispatch } = store;
-
   const apiConnect = () => socket.connect();
   const apiDisconnect = () => socket.disconnect();
 

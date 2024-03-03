@@ -11,8 +11,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // app();
 
 /* eslint-disable functional/no-expression-statements */
+import { io } from 'socket.io-client';
 import './index.css';
-import 'react-toastify/dist/ReactToastify.css';
+
 import initApp from './init.jsx';
 
-initApp();
+const socket = io();
+
+initApp(socket);

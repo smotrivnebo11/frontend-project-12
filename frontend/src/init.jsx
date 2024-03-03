@@ -1,4 +1,3 @@
-/* eslint-disable functional/no-expression-statements */
 import React from 'react';
 import filter from 'leo-profanity';
 import ReactDOM from 'react-dom/client';
@@ -6,28 +5,23 @@ import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider as StoreProvider } from 'react-redux';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
-import { io } from 'socket.io-client';
 
 import App from './components/App.jsx';
+import SocketProvider from './contexts/SocketProvider.jsx';
 import resources from './locales/index.js';
 import store from './slices/store.js';
 import socketApi from './socketApi/api.js';
-import SocketProvider from './contexts/SocketProvider.jsx';
 
-const init = async () => {
+const init = async (socket) => {
   const rollbarConfig = {
-    accessToken: '3a93ce8dc35f4affb130d74f51abf950',
-    environment: 'testenv',
+    accessToken: process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN,
+    enabled: process.env.NODE_ENV === 'production',
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+    environment: 'production',
   };
 
-  function TestError() {
-    const a = null;
-    return a.hello();
-  }
-
-  // const api = socketApi();
-  const socket = io();
-  const api = socketApi(socket);
+  const api = socketApi(socket, store);
   const i18n = i18next.createInstance();
 
   await i18n
@@ -45,7 +39,6 @@ const init = async () => {
            <SocketProvider api={api}>
              <I18nextProvider i18n={i18n}>
                <App />
-               <TestError />
              </I18nextProvider>
            </SocketProvider>
          </StoreProvider>
