@@ -8,15 +8,15 @@ https://hexlet-chat-uftm.onrender.com
 Hexlet Chat is a simplified version of Slack, where you can send and receive messages in real time, create, delete and rename channels.
 In this chat you receive pop-up notifications of user actions, obscene words are hidden by ***. 
 
-![Chat-img](./img/readmepic.png)
+![Chat-img](frontend/src/assets/readmepic.png)
 
 ## How to use it?
 
 <code>[Click here to see the app in browser](https://hexlet-chat-uftm.onrender.com)</code> 
 - Sign up with your own nickname and password or log in with the admin account
 
-     - Login: `admin`
-     - Password: `admin`
+        - Login: `admin`
+        - Password: `admin`
 
 
   - Send a message in the default channels (#general and #random)
@@ -42,16 +42,16 @@ In this chat you receive pop-up notifications of user actions, obscene words are
  2. make install
  3. make start
 
-  ## Tech stack
+## Tech stack
 
-  - React / React Hooks - user interfaces
-  - Redux / Redux Toolkit - state container
-  - Bootstrap - CSS Framework
-  - Socket.io - WebSocket based browser-server communication
-  - Axios - HTTP requests
-  - Formik - building forms on React
-  - Yup - form validation
-  - I18next - manage text
-  - React-toastify - pop-up notifications
-  - Leo-profanity - profanity filter
-  - Rollbar - error tracking
+- React / React Hooks - user interfaces
+- Redux / Redux Toolkit - state container
+- Bootstrap - CSS Framework
+- Socket.io - WebSocket based browser-server communication
+- Axios - HTTP requests
+- Formik - building forms on React
+- Yup - form validation
+- I18next - manage text
+- React-toastify - pop-up notifications
+- Leo-profanity - profanity filter
+- Rollbar - error tracking
