@@ -12,7 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 /* eslint-disable functional/no-expression-statements */
 import { io } from 'socket.io-client';
-import './index.css';
+import './styles/index.css';
+import './styles/App.scss';
 
 import initApp from './init.jsx';
 

@@ -78,7 +78,7 @@ const SignupPage = () => {
 
             <Card.Body className="row p-5">
               <Col xs={12} md={6} className="d-flex align-items-center justify-content-center">
-                <img src={registrationImg} className="rounded-circle" alt={t('registration')} />
+                <img src={registrationImg} className="d-flex w-100" alt={t('registration')} />
               </Col>
               <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
                 <h1 className="text-center mb-4">{t('registration')}</h1>
@@ -138,7 +138,7 @@ const SignupPage = () => {
                 <Button
                   type="submit"
                   variant="outline-primary"
-                  className="w-100 mb-3"
+                  className="w-100 mb-3 signup-button"
                   disabled={formik.isSubmitting}
                 >
                   {t('makeRegistration')}

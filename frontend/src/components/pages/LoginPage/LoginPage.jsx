@@ -11,6 +11,7 @@ import {
   Card,
   Button,
   Form,
+  Image,
 } from 'react-bootstrap';
 
 import { loginSchema } from '../../../validation/validationSchema.js';
@@ -53,7 +54,6 @@ const LoginPage = () => {
         if (err.isAxiosError) {
           if (err.response.status === 401) {
             setAuthFailed(true);
-            navigate('/login');
             inputNameRef.current.select();
           } else {
             toast.error(t('errors.network'));
@@ -70,9 +70,9 @@ const LoginPage = () => {
       <Row className="justify-content-center align-content-center h-100">
         <Col xs={12} md={8} xxl={6}>
           <Card className="shadow-sm">
-            <Card.Body className="row p-5">
+            <Card.Body className="card-body row p-5">
               <Col xs={12} md={6} className="d-flex align-items-center justify-content-center">
-                <img src={loginImg} className="rounded-circle" alt={t('enter')} />
+                <Image with={250} height={250} alt={t('enter')} src={loginImg} />
               </Col>
               <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
                 <h1 className="text-center mb-4">{t('enter')}</h1>
@@ -111,7 +111,7 @@ const LoginPage = () => {
                 <Button
                   type="submit"
                   variant="outline-primary"
-                  className="w-100 mb-3"
+                  className="w-100 mb-3 login-button"
                   disabled={formik.isSubmitting}
                 >
                   {t('enter')}
