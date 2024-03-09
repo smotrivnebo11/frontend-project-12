@@ -1,20 +1,20 @@
+/* eslint-disable no-lone-blocks */
 import React from 'react';
-import { Button, Navbar, Container } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
+// import { useTranslation } from 'react-i18next';
 import {
   BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
   Navigate,
+  Route,
+  Routes,
   useLocation,
 } from 'react-router-dom';
 
 import useAuth from '../hooks/index.js';
-import routes from '../routes/routes.js';
+import { appPaths } from '../routes/routes.js';
 
 import AuthProvider from '../contexts/AuthProvider.jsx';
+import NavBar from './navbar/Navbar.jsx';
 import { SignUpPage } from './pages/SignUpPage/index.js';
 import { LoginPage } from './pages/LoginPage/index.js';
 import { ChatPage } from './pages/ChatPage/index.js';
@@ -26,47 +26,48 @@ const PrivateRoute = ({ children }) => {
 
   return auth.loggedIn
     ? children
-    : <Navigate to={routes.loginPagePath()} state={{ from: location }} />;
+    : <Navigate to={appPaths.loginPagePath()} state={{ from: location }} />;
 };
 
-const AuthButton = () => {
-  const auth = useAuth();
-  const { t } = useTranslation();
+// const AuthButton = () => {
+//   const auth = useAuth();
+//   const { t } = useTranslation();
 
-  return auth.loggedIn
-    ? <Button onClick={auth.logOut}>{t('exit')}</Button>
-    : null;
-};
+//   return auth.loggedIn
+//     ? <Button onClick={auth.logOut}>{t('exit')}</Button>
+//     : null;
+// };
 
 const App = () => {
-  const { t } = useTranslation();
+  { /* const { t } = useTranslation(); */ }
 
   return (
     <AuthProvider>
       <div className="d-flex flex-column h-100">
         <Router>
 
-          <Navbar expand="lg" variant="light" bg="white" className="shadow-sm">
+          {/* <Navbar expand="lg" variant="light" bg="white" className="shadow-sm">
             <Container>
-              <Navbar.Brand as={Link} to="{routes.chatPagePath()}">{t('name')}</Navbar.Brand>
+              <Navbar.Brand as={Link} to={appPaths.chatPagePath()}>{t('name')}</Navbar.Brand>
               <AuthButton />
-            </Container>
-          </Navbar>
+            </Container> */}
+          {/* </NavBar> */}
+          <NavBar />
 
           <ToastContainer />
 
           <Routes>
             <Route
-              path={routes.chatPagePath()}
+              path={appPaths.chatPagePath()}
               element={(
                 <PrivateRoute>
                   <ChatPage />
                 </PrivateRoute>
               )}
             />
-            <Route path={routes.loginPagePath()} element={<LoginPage />} />
-            <Route path={routes.signupPagePath()} element={<SignUpPage />} />
-            <Route path={routes.notFoundPath()} element={<NotFoundPage />} />
+            <Route path={appPaths.loginPagePath()} element={<LoginPage />} />
+            <Route path={appPaths.signupPagePath()} element={<SignUpPage />} />
+            <Route path={appPaths.notFoundPath()} element={<NotFoundPage />} />
           </Routes>
 
         </Router>
@@ -74,5 +75,35 @@ const App = () => {
     </AuthProvider>
   );
 };
+
+// const PrivateRoute = ({ children }) => {
+//   const auth = useAuth();
+//   return auth.user ? children : <Navigate to={appPaths.loginPagePath()} />;
+// };
+
+// const App = () => (
+
+//   <BrowserRouter>
+//     <div className="d-flex flex-column h-100">
+//       <ToastContainer />
+//       <NavBar />
+
+//       <Routes>
+//         <Route path={appPaths.loginPagePath()} element={<LoginPage />} />
+//         <Route path={appPaths.signupPagePath()} element={<SignUpPage />} />
+//         <Route
+//           path={appPaths.chatPagePath()}
+//           element={(
+//             <PrivateRoute>
+//               <ChatPage />
+//             </PrivateRoute>
+//           )}
+//         />
+//         <Route path={appPaths.notFoundPath()} element={<NotFoundPage />} />
+//       </Routes>
+
+//     </div>
+//   </BrowserRouter>
+// );
 
 export default App;

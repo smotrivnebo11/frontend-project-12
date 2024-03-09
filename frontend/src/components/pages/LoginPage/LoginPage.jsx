@@ -17,7 +17,7 @@ import {
 import { loginSchema } from '../../../validation/validationSchema.js';
 import useAuth from '../../../hooks/index.js';
 import loginImg from '../../../assets/loginPage.jpeg';
-import routes from '../../../routes/routes.js';
+import { appPaths, apiRoutes } from '../../../routes/routes.js';
 
 const LoginPage = () => {
   const inputNameRef = useRef();
@@ -39,7 +39,7 @@ const LoginPage = () => {
 
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(routes.loginPath(), {
+        const response = await axios.post(apiRoutes.loginPath(), {
           username: values.username,
           password: values.password,
         });
@@ -124,7 +124,7 @@ const LoginPage = () => {
                 <span className="me-2">
                   {t('noAccount')}
                 </span>
-                <Card.Link as={Link} to="/signup">{t('registration')}</Card.Link>
+                <Card.Link as={Link} to={appPaths.signupPagePath()}>{t('registration')}</Card.Link>
               </div>
             </Card.Footer>
           </Card>

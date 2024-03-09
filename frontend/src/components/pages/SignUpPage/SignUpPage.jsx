@@ -14,7 +14,7 @@ import {
   Form,
 } from 'react-bootstrap';
 
-import routes from '../../../routes/routes.js';
+import { apiRoutes } from '../../../routes/routes.js';
 import useAuth from '../../../hooks/index.js';
 import registrationImg from '../../../assets/signupPage.jpeg';
 import { registrationSchema } from '../../../validation/validationSchema.js';
@@ -46,7 +46,7 @@ const SignupPage = () => {
 
     onSubmit: async (values) => {
       try {
-        const res = await axios.post(routes.signupPath(), {
+        const res = await axios.post(apiRoutes.signupPath(), {
           username: values.username,
           password: values.password,
         });

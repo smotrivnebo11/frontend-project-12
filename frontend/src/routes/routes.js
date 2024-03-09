@@ -1,13 +1,14 @@
-const root = '';
 const apiPath = 'api/v1';
 
-export default {
-  signupPagePath: () => [root, 'signup'].join('/'),
-  loginPagePath: () => [root, 'login'].join('/'),
-  chatPagePath: () => [root, ''].join('/'),
-  notFoundPath: () => [root, '*'].join('/'),
+export const appPaths = {
+  signupPagePath: () => '/signup',
+  loginPagePath: () => '/login',
+  chatPagePath: () => '/',
+  notFoundPath: () => '*',
+};
 
-  signupPath: () => [root, apiPath, 'signup'].join('/'),
-  loginPath: () => [root, apiPath, 'login'].join('/'),
-  dataPath: () => [root, apiPath, 'data'].join('/'),
+export const apiRoutes = {
+  signupPath: () => [apiPath, 'signup'].join('/'),
+  loginPath: () => [apiPath, 'login'].join('/'),
+  dataPath: () => [apiPath, 'data'].join('/'),
 };
