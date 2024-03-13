@@ -1,51 +1,114 @@
-import React from 'react';
-import { toast } from 'react-toastify';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
+import { Button, Modal, Form } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { useRollbar } from '@rollbar/react';
+import { toast } from 'react-toastify';
+
 import { useFormik } from 'formik';
-import ModalInput from './Modal.jsx';
 
 import { useSocket } from '../../../hooks/index.js';
-import { closeModal } from '../../../slices/modalSlice.js';
+import { customSelectors } from '../../../slices/channelsSlice.js';
 import { newChannelSchema } from '../../../validation/validationSchema.js';
 
-const AddChannel = () => {
+const AddChannel = ({ handleClose }) => {
   const { t } = useTranslation();
-  const { addNewChannel } = useSocket();
-  const dispatch = useDispatch();
-  const { channels } = useSelector((state) => state.channels);
-  const { modals } = useSelector((state) => state.modals);
-  const { isShown } = modals;
+  const api = useSocket();
+  const rollbar = useRollbar();
+
+  const inputRef = useRef(null);
+
+  const channelsName = useSelector(customSelectors.allChannels)
+    .reduce((acc, channel) => [...acc, channel.name], []);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   const formik = useFormik({
-    initialValues: { channelName: '' },
-
-    validationSchema: newChannelSchema(channels, t('modal.unique'), t('modal.lengthParams')),
-
+    initialValues: {
+      name: '',
+    },
+    // validationSchema: newChannelSchema(channelsName),
+    validationSchema: newChannelSchema(channelsName, t('modal.unique'), t('modal.lengthParams')),
+    validateOnBlur: false,
+    validateOnChange: false,
     onSubmit: (values) => {
       try {
-        addNewChannel({ name: values.channelName });
-        formik.resetForm();
-        dispatch(closeModal());
+        api.addChannel(values);
+        // toast.success(t('notify.createdChannel'));
         toast.success(t('success.newChannel'));
-      } catch (err) {
-        toast.error(t('errors.channelAdd'));
+        handleClose();
+      } catch (error) {
+        formik.setSubmitting(false);
+
+        if (error.isAxiosError && error.response.status === 401) {
+          inputRef.current.select();
+
+          return;
+        }
+        // toast.error(t('notify.networkError'));
+        toast.error(t('errors.network'));
+        rollbar.error('AddChannel', error);
       }
     },
   });
 
-  const handleClose = () => dispatch(closeModal());
-
-  const values = {
-    isShown,
-    handleClose,
-    title: t('modal.add'),
-    formik,
-    cancelButton: t('cancel'),
-    submitButton: t('send'),
-  };
-
-  return <ModalInput values={values} />;
+  return (
+    <>
+      <Modal.Header closeButton>
+        <Modal.Title>{t('modal.add')}</Modal.Title>
+        {/* {t('ui.addChannel')} */}
+      </Modal.Header>
+      <Modal.Body>
+        <Form
+          onSubmit={formik.handleSubmit}
+        >
+          <Form.Group controlId="name">
+            <Form.Control
+              className="mb-2"
+              name="name"
+              ref={inputRef}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.name}
+              isInvalid={formik.errors.name && formik.touched.name}
+              disabled={formik.isSubmitting}
+            />
+            <Form.Label
+              visuallyHidden
+            >
+              {t('modal.channelName')}
+              {/* {t('ui.nameChannel')} */}
+            </Form.Label>
+            <Form.Control.Feedback type="invalid">
+              {t(formik.errors.name)}
+            </Form.Control.Feedback>
+            <div
+              className="d-flex justify-content-end"
+            >
+              <Button
+                className="me-2"
+                variant="secondary"
+                type="button"
+                onClick={handleClose}
+              >
+                {/* {t('buttons.cancel')} */}
+                {t('cancel')}
+              </Button>
+              <Button
+                variant="primary"
+                type="submit"
+              >
+                {/* {t('buttons.submit')} */}
+                {t('send')}
+              </Button>
+            </div>
+          </Form.Group>
+        </Form>
+      </Modal.Body>
+    </>
+  );
 };
 
 export default AddChannel;

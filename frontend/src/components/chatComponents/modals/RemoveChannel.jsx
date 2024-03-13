@@ -1,46 +1,63 @@
+/* eslint-disable max-len */
 import React from 'react';
-import { toast } from 'react-toastify';
-import { useSelector, useDispatch } from 'react-redux';
+import { Button, Modal } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { Modal, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import { useRollbar } from '@rollbar/react';
 
 import { useSocket } from '../../../hooks/index.js';
-import { closeModal } from '../../../slices/modalSlice.js';
 
-const RemoveChannel = () => {
+import { selectors } from '../../../slices/modalSlice.js';
+
+const RemoveChannel = ({ handleClose }) => {
   const { t } = useTranslation();
-  const { removeChannel } = useSocket();
-  const dispatch = useDispatch();
+  const api = useSocket();
+  const rollbar = useRollbar();
 
-  const { modals } = useSelector((state) => state.modals);
-  const { isShown, targetId } = modals;
+  const { channelId } = useSelector(selectors.getModalContext);
 
-  const handleClose = () => dispatch(closeModal());
-
-  const handleRemove = (id) => {
+  const onClick = () => {
     try {
-      removeChannel(id);
-      dispatch(closeModal());
+      api.removeChannel(channelId);
+      // toast.success(t('notify.removedChannel'));
       toast.success(t('success.removeChannel'));
-    } catch (err) {
-      toast.error(t('errors.channelRemove'));
+      handleClose();
+    } catch (error) {
+      // toast.error(t('notify.networkError'));
+      toast.error(t('errors.network'));
+      rollbar.error('RemoveChannel', error);
     }
   };
 
   return (
-    <Modal show={isShown} centered>
-      <Modal.Header closeButton onHide={handleClose}>
+    <>
+      <Modal.Header closeButton>
         <Modal.Title>{t('modal.removeChannel')}</Modal.Title>
+        {/* {t('ui.removeChannel')} */}
       </Modal.Header>
-
       <Modal.Body>
-        <Modal.Title>{t('modal.confirm')}</Modal.Title>
+        <p className="lead">{t('modal.confirm')}</p>
+        {/* Уверены? */}
         <div className="d-flex justify-content-end">
-          <Button className="me-2" variant="secondary" onClick={handleClose}>{t('cancel')}</Button>
-          <Button type="submit" variant="danger" onClick={() => handleRemove(targetId)}>{t('modal.remove')}</Button>
+          <Button
+            variant="secondary"
+            className="me-2"
+            onClick={handleClose}
+          >
+            {/* {t('buttons.cancel')} */}
+            {t('cancel')}
+          </Button>
+          <Button
+            variant="danger"
+            onClick={onClick}
+          >
+            {/* {t('buttons.remove')} */}
+            {t('modal.remove')}
+          </Button>
         </div>
       </Modal.Body>
-    </Modal>
+    </>
   );
 };
 

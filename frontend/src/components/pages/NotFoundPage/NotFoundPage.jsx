@@ -12,12 +12,15 @@ const NotFoundPage = () => {
 
   return (
     <div className="text-center">
-      <Image width="50%" height="50%" alt={t('pageNotFound')} src={notFoundImg} fluid />
+      <Image width="50%" height="50%" alt={t('pageNotFound')} src={notFoundImg} fluid/>
+      {/* {t('ui.notFoundPage')} */}
       <h1 className="h4 text-muted">{t('pageNotFound')}</h1>
+      {/* {t('ui.notFoundPage')} */}
       <p className="text-muted">
         {t('redirect')}
         {' '}
         <Link to={appPaths.chatPagePath()}>{t('mainPage')}</Link>
+        {/* {t('ui.mainPage')} */}
       </p>
     </div>
   );

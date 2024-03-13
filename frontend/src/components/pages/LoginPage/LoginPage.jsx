@@ -1,130 +1,151 @@
-import axios from 'axios';
-import { toast } from 'react-toastify';
 import React, { useEffect, useRef, useState } from 'react';
-import { useFormik } from 'formik';
-import { useNavigate, Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Button,
-  Form,
-  Image,
+  Button, Card, Col, Container, Form, Image, Row,
 } from 'react-bootstrap';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+
+import axios from 'axios';
+import { useFormik } from 'formik';
+import { useRollbar } from '@rollbar/react';
 
 import { loginSchema } from '../../../validation/validationSchema.js';
-import useAuth from '../../../hooks/index.js';
+import { useAuth } from '../../../hooks/index.js';
+import { apiRoutes, appPaths } from '../../../routes/routes.js';
+
 import loginImg from '../../../assets/loginPage.jpeg';
-import { appPaths, apiRoutes } from '../../../routes/routes.js';
 
 const LoginPage = () => {
-  const inputNameRef = useRef();
-  const [authFailed, setAuthFailed] = useState(false);
-  const auth = useAuth();
-  const navigate = useNavigate();
   const { t } = useTranslation();
+  const { logIn } = useAuth();
+  const rollbar = useRollbar();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [authFailed, setAuthFailed] = useState(false);
+  const inputName = useRef(null);
 
   useEffect(() => {
-    inputNameRef.current.focus();
+    if (inputName.current) {
+      inputName.current.focus();
+    }
   }, []);
 
+  useEffect(() => {
+    if (inputName.current && authFailed) {
+      inputName.current.select();
+    }
+  }, [authFailed]);
+
   const formik = useFormik({
-    initialValues: {
-      username: '',
-      password: '',
-      validationSchema: loginSchema(t('errors.required')),
-    },
+    initialValues: { username: '', password: '' },
+
+    validationSchema: loginSchema(t('errors.required')),
+
+    validateOnChange: false,
 
     onSubmit: async (values) => {
+      setAuthFailed(false);
       try {
-        const response = await axios.post(apiRoutes.loginPath(), {
-          username: values.username,
-          password: values.password,
-        });
-
-        localStorage.setItem('userdata', JSON.stringify(response.data));
-        auth.logIn();
-        setAuthFailed(false);
-        navigate('/');
-      } catch (err) {
+        const { data } = await axios.post(apiRoutes.loginPath(), values);
+        logIn(data);
+        // navigate(appPaths.chatPagePath());
+        const { from } = location.state || { from: { pathname: appPaths.chatPagePath() } };
+        navigate(from);
+      } catch (error) {
         formik.setSubmitting(false);
-
-        if (err.isAxiosError) {
-          if (err.response.status === 401) {
-            setAuthFailed(true);
-            inputNameRef.current.select();
-          } else {
+        if (error.isAxiosError) {
+          if (error.code === 'ERR_NETWORK') {
             toast.error(t('errors.network'));
+            // t('notify.networkError')
+            rollbar.error('LoginPage', error);
           }
-        } else {
-          toast.error(err.message);
+          if (error.response.status === 401) {
+            setAuthFailed(true);
+            rollbar.error('LoginPage', error);
+          }
         }
+        throw error;
       }
     },
+
   });
 
+  const isInvalidUsername = formik.touched.username && formik.errors.username;
+  const isInvalidPassword = formik.touched.password && formik.errors.password;
+
   return (
-    <Container fluid className="h-100">
+    <Container className="h-100" fluid>
       <Row className="justify-content-center align-content-center h-100">
         <Col xs={12} md={8} xxl={6}>
           <Card className="shadow-sm">
-            <Card.Body className="card-body row p-5">
+            <Card.Body className="row p-5">
               <Col xs={12} md={6} className="d-flex align-items-center justify-content-center">
-                <Image with={250} height={250} alt={t('enter')} src={loginImg} />
+                <Image width={250} height={250} alt={t('enter')} src={loginImg} />
+                {/* alt={t('buttons.logIn')} */}
               </Col>
+
               <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
                 <h1 className="text-center mb-4">{t('enter')}</h1>
+                {/* alt={t('buttons.logIn')} */}
+                <fieldset disabled={formik.isSubmitting}>
 
-                <Form.Floating className="mb-3">
-                  <Form.Control
-                    name="username"
-                    autoComplete="username"
-                    required
-                    placeholder={t('placeholders.login')}
-                    id="username"
-                    onChange={formik.handleChange}
-                    value={formik.values.username}
-                    isInvalid={authFailed}
-                    ref={inputNameRef}
-                  />
-                  <Form.Label htmlFor="username">{t('placeholders.login')}</Form.Label>
-                </Form.Floating>
+                  <Form.Floating className="mb-3" controlid="floatingInput">
+                    <Form.Control
+                      id="username"
+                      name="username"
+                      type="text"
+                      autoComplete="username"
+                      placeholder={t('placeholders.login')}
+                      // placeholder={t('fields.nickname')}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.username}
+                      isInvalid={authFailed || isInvalidUsername}
+                      ref={inputName}
+                      required
+                    />
+                    <Form.Label htmlFor="username">{t('placeholders.login')}</Form.Label>
+                    <Form.Control.Feedback type="invalid" className="invalid-feedback">
+                    {/* tooltip={formik.errors.username && formik.touched.username} */}
+                      {formik.errors.username}
+                    </Form.Control.Feedback>
+                  </Form.Floating>
 
-                <Form.Floating className="mb-4">
-                  <Form.Control
-                    name="password"
-                    autoComplete="current-password"
-                    required
-                    placeholder={t('placeholders.password')}
-                    type="password"
-                    id="password"
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                    isInvalid={authFailed}
-                  />
-                  <Form.Label htmlFor="password">{t('placeholders.password')}</Form.Label>
-                  <div className="invalid-tooltip">{t('errors.invalidFeedback')}</div>
-                </Form.Floating>
+                  <Form.Floating className="mb-4" controlid="floatingPassword">
+                    <Form.Control
+                      id="password"
+                      name="password"
+                      type="password"
+                      autoComplete="password"
+                      placeholder={t('placeholders.password')}
+                      // placeholder={t('fields.password')}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.password}
+                      isInvalid={authFailed || isInvalidPassword}
+                      required
+                    />
+                    <Form.Label htmlFor="password">{t('placeholders.password')}</Form.Label>
+                    <Form.Control.Feedback type="invalid" className="invalid-feedback">{formik.errors.password || t('errors.invalidFeedback')}</Form.Control.Feedback>
+                    {/* {t('errors.incorrect')} */}
+                  </Form.Floating>
 
-                <Button
-                  type="submit"
-                  variant="outline-primary"
-                  className="w-100 mb-3 login-button"
-                  disabled={formik.isSubmitting}
-                >
-                  {t('enter')}
-                </Button>
-
+                  <Button type="submit" variant="outline-primary" className="w-100 mb-3">{t('enter')}</Button>
+                  {/* {t('buttons.logIn')} */}
+                </fieldset>
               </Form>
+
             </Card.Body>
             <Card.Footer className="p-4">
               <div className="text-center">
-                <span className="me-2">
-                  {t('noAccount')}
-                </span>
-                <Card.Link as={Link} to={appPaths.signupPagePath()}>{t('registration')}</Card.Link>
+              <span>{t('noAccount')}</span>
+              {/* <span>{t('ui.noAccount')}</span> */}
+                {/* <a href={routes.signUpPage()}>{t('ui.registration')}</a>
+                <span>{t('noAccount')}</span> */}
+                {' '}
+                <Link to={appPaths.signupPagePath()}>{t('registration')}</Link>
               </div>
             </Card.Footer>
           </Card>

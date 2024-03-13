@@ -1,8 +1,8 @@
-:root {
+/* :root {
   --light-blue: #b5c8f9;
   --royal-blue: #4169E1;
   --dark-blue: #4169E17d;
-}
+} */
 
 body {
   margin: 0;
@@ -23,10 +23,10 @@ code {
   flex-direction: row;
 } */
 
-.form-control:focus {
+/* .form-control:focus {
   border-color: var(--royal-blue);
   box-shadow: 0 0 0 0.25rem var(--dark-blue);
-}
+} */
 
 /* .btn-outline-info {
   --bs-btn-color: #0000CD;
@@ -36,13 +36,13 @@ a {
   color: #0000CD;
 } */
 
-.login-button:hover {
+/* .login-button:hover {
   background-color: var(--royal-blue);
 }
 
 .signup-button:hover {
   background-color: var(--royal-blue);
-}
+} */
 
 /* .channel-button:active {
   padding: 0.4rem 0.8rem;
@@ -54,12 +54,7 @@ a {
   overflow-x: hidden;
   text-overflow: ellipsis;
 } */
-
+/* 
 .message {
   width: fit-content;
-}
-
-/* .navbar-brand {
-  color: var(--dark-blue);
-  font-weight: bold;
 } */

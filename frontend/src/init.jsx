@@ -1,42 +1,42 @@
-import React from 'react';
-import filter from 'leo-profanity';
-import ReactDOM from 'react-dom/client';
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider as StoreProvider } from 'react-redux';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 
-import App from './components/App.jsx';
-import SocketProvider from './contexts/SocketProvider.jsx';
 import resources from './locales/index.js';
+
 import store from './slices/store.js';
-import socketApi from './socketApi/api.js';
+
+import AuthProvider from './contexts/AuthProvider.jsx';
+import SocketProvider from './contexts/SocketProvider.jsx';
 import rollbarConfig from './rollbar/rollbarConfig.js';
+import App from './components/App.jsx';
 
 const init = async (socket) => {
-  const api = socketApi(socket, store);
   const i18n = i18next.createInstance();
 
   await i18n
     .use(initReactI18next)
-    .init({ resources, fallbackLng: 'ru' });
+    .init({
+      resources,
+      lng: 'ru',
+      fallbackLng: 'ru',
+    });
 
-  filter.add(filter.getDictionary('ru'));
-
-  const root = ReactDOM.createRoot(document.getElementById('root'));
-
-  return root.render(
+  return (
     <RollbarProvider config={rollbarConfig}>
-       <ErrorBoundary>
-         <StoreProvider store={store}>
-           <SocketProvider api={api}>
-             <I18nextProvider i18n={i18n}>
-               <App />
-             </I18nextProvider>
-           </SocketProvider>
-         </StoreProvider>
-       </ErrorBoundary>
-     </RollbarProvider>,
+      <ErrorBoundary>
+        <I18nextProvider i18n={i18n}>
+          <StoreProvider store={store}>
+            <AuthProvider>
+              <SocketProvider socket={socket}>
+                <App />
+              </SocketProvider>
+            </AuthProvider>
+          </StoreProvider>
+        </I18nextProvider>
+      </ErrorBoundary>
+    </RollbarProvider>
   );
 };
 

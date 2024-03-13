@@ -4,12 +4,22 @@ import axios from 'axios';
 import { apiRoutes } from '../routes/routes.js';
 
 const fetchData = createAsyncThunk(
-  'data/fetchData',
-  async (token) => {
-    const { data } = await axios.get(apiRoutes.dataPath(), { headers: { Authorization: `Bearer ${token}` } });
-    // Bearer-токен - токен на предъявителя
+  'fetchData',
+  async (header, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(apiRoutes.dataPath(), { headers: header });
+      // eslint-disable-next-line max-len
+      // const { data } = await axios.get(apiRoutes.dataPath(), { headers: { Authorization: `Bearer ${token}` } });
+      // Bearer-токен - токен на предъявителя
 
-    return data;
+      return res.data;
+    } catch (error) {
+      if (error.isAxiosError) {
+        return rejectWithValue(error.response.status);
+      }
+
+      throw error;
+    }
   },
 );
 

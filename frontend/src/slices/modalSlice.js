@@ -2,35 +2,39 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  modals: {
-    isShown: false,
-    modalType: '',
-    targetId: null,
-  },
-};
+import { actions as loadingStateActions } from './loadingSlice.js';
 
-const modalsSlice = createSlice({
-  name: 'modals',
+const initialState = ({
+  isOpened: false,
+  type: null,
+  context: null,
+});
 
+const modalSlice = createSlice({
+  name: 'modal',
   initialState,
-
   reducers: {
-    openModal: (state, { payload }) => {
-      const { type, targetId } = payload;
-
-      state.modals.isShown = true;
-      state.modals.modalType = type;
-      state.modals.targetId = targetId;
+    open: (state, { payload: { type, context = null } }) => {
+      state.isOpened = true;
+      state.type = type;
+      state.context = context;
     },
-
-    closeModal: (state) => {
-      state.modals.isShown = false;
-      state.modals.modalType = '';
-      state.modals.targetId = null;
+    close: (state) => {
+      state.isOpened = false;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(loadingStateActions.unload, () => initialState);
   },
 });
 
-export const { openModal, closeModal } = modalsSlice.actions;
-export default modalsSlice.reducer;
+const { actions } = modalSlice;
+const selectors = {
+  getModalType: (state) => state.modal.type,
+  isModalOpen: (state) => state.modal.isOpen,
+  getModalContext: (state) => state.modal.context,
+};
+
+export { actions, selectors };
+export default modalSlice.reducer;

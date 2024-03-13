@@ -7,17 +7,15 @@ const registrationSchema = (nameMsg, passwordMsg, equalMsg, requiredMsg) => yup.
     .min(3, nameMsg)
     .max(20, nameMsg)
     .required(requiredMsg),
-
   password: yup
     .string()
     .trim()
     .min(6, passwordMsg)
     .required(requiredMsg),
-
-  passwordConfirmation: yup
+  confirmPassword: yup
     .string()
     .trim()
-    .oneOf([yup.ref('password')], equalMsg)
+    .oneOf([yup.ref('password'), null], equalMsg)
     .required(requiredMsg),
 });
 
@@ -26,7 +24,6 @@ const loginSchema = (message) => yup.object().shape({
     .string()
     .trim()
     .required(message),
-
   password: yup
     .string()
     .required(message),
@@ -40,13 +37,17 @@ const chatSchema = (message) => yup.object().shape({
 });
 
 const newChannelSchema = (channels, doubleMsg, lengthMsg) => yup.object().shape({
-  channelName: yup
+  name: yup
     .string()
     .trim()
-    .notOneOf(channels.map((channel) => channel.name), doubleMsg)
+    .required(lengthMsg)
     .min(3, lengthMsg)
     .max(20, lengthMsg)
-    .required(lengthMsg),
+    .notOneOf(channels, doubleMsg),
+  // .required('errors.required')
+  // .min(3, 'errors.rangeLetter')
+  // .max(20, 'errors.rangeLetter')
+  // .notOneOf(channels, 'errors.notOneOf'),
 });
 
 export {
