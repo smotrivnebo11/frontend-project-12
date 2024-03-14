@@ -21,7 +21,7 @@ const Channels = ({ channels, currentChannelId }) => {
   const { t } = useTranslation();
 
   const handleSelect = (id) => () => {
-    dispatch(channelsActions.changeChannel(id));
+    dispatch(channelsActions.switchChannel(id));
   };
 
   const handleAdd = () => {

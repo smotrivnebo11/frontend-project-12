@@ -10,6 +10,6 @@ export default configureStore({
     channels: channelsReducer,
     messages: messagesReducer,
     modal: modalReducer,
-    loading: loadingStateReducer,
+    loadingState: loadingStateReducer,
   },
 });

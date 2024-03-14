@@ -9,6 +9,7 @@ import store from './slices/store.js';
 
 import AuthProvider from './contexts/AuthProvider.jsx';
 import SocketProvider from './contexts/SocketProvider.jsx';
+import FilterProvider from './contexts/FilterProvider.jsx';
 import rollbarConfig from './rollbar/rollbarConfig.js';
 import App from './components/App.jsx';
 
@@ -29,9 +30,11 @@ const init = async (socket) => {
         <I18nextProvider i18n={i18n}>
           <StoreProvider store={store}>
             <AuthProvider>
-              <SocketProvider socket={socket}>
-                <App />
-              </SocketProvider>
+              <FilterProvider>
+                <SocketProvider socket={socket}>
+                  <App />
+                </SocketProvider>
+              </FilterProvider>
             </AuthProvider>
           </StoreProvider>
         </I18nextProvider>

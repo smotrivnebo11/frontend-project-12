@@ -41,7 +41,6 @@ const AddChannel = ({ handleClose }) => {
         handleClose();
       } catch (error) {
         formik.setSubmitting(false);
-
         if (error.isAxiosError && error.response.status === 401) {
           inputRef.current.select();
 

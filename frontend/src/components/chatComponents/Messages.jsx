@@ -16,7 +16,7 @@ const MessageHeader = ({ channelName, messagesAmount }) => {
         <b>{`# ${filterProfanity(channelName)}`}</b>
       </p>
       <span className="text-muted">
-        {t('messagesCounter.messages', { count: messagesAmount })};
+        {t('messagesCounter.messages', { count: messagesAmount })}
         {/* ui.counter.count */}
       </span>
     </div>
