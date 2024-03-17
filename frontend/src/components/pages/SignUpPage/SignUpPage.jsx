@@ -115,7 +115,7 @@ const SignupPage = () => {
                 onSubmit={formik.handleSubmit}
                 className="w-50"
               > */}
-                <h1 className="text-center mb-4">{t('registration')}</h1>
+                <h1 className="text-center mb-4">{t('ui.registration')}</h1>
                 {/* {t('ui.registration')} */}
                 <fieldset disabled={formik.isSubmitting}>
 
@@ -182,7 +182,7 @@ const SignupPage = () => {
                     {/* {t(formik.errors.confirmPassword) || t('errors.alreadyExists')} */}
                   </Form.Floating>
 
-                  <Button type="submit" variant="outline-info" className="w-100 mb-3">{t('makeRegistration')}</Button>
+                  <Button type="submit" variant="outline-info" className="w-100 mb-3">{t('buttons.makeRegistration')}</Button>
                   {/* variant="outline-primary" */}
                   {/* {t('buttons.register')} */}
                 </fieldset>
@@ -192,7 +192,7 @@ const SignupPage = () => {
             <Card.Footer className="p-4">
               <div className="text-center">
                 <span>{t('ui.exist')}</span>
-                <a href={appPaths.loginPagePath()}>{t('enter')}</a>
+                <a href={appPaths.loginPagePath()}>{t('buttons.enter')}</a>
                 {/* {t('buttons.logIn')} */}
               </div>
             </Card.Footer>

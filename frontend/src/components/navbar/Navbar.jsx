@@ -13,7 +13,7 @@ const AuthButton = () => {
 
   return (
     auth.user
-      ? <Button onClick={auth.logOut} variant="info">{t('exit')}</Button>
+      ? <Button onClick={auth.logOut} variant="info">{t('buttons.exit')}</Button>
       // variant="primary"
       // {t('buttons.logOut')}
       : null
@@ -26,7 +26,7 @@ const NavBar = () => {
   return (
     <Navbar className="shadow-sm" bg="white" expand="lg">
       <div className="container">
-        <Navbar.Brand as={Link} to={appPaths.chatPagePath()}>{t('name')}</Navbar.Brand>
+        <Navbar.Brand as={Link} to={appPaths.chatPagePath()}>{t('pages.name')}</Navbar.Brand>
         {/* {t('ui.hexletChat')} */}
         <AuthButton />
       </div>

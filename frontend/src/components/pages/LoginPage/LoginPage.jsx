@@ -82,7 +82,7 @@ const LoginPage = () => {
           <Card className="shadow-sm">
             <Card.Body className="row p-5">
               <Col xs={12} md={6} className="d-flex align-items-center justify-content-center">
-                <Image width={250} height={250} alt={t('enter')} src={loginImg} />
+                <Image width={250} height={250} alt={t('buttons.enter')} src={loginImg} />
                 {/* alt={t('buttons.logIn')} */}
               </Col>
 
@@ -132,7 +132,7 @@ const LoginPage = () => {
                     {/* {t('errors.incorrect')} */}
                   </Form.Floating>
 
-                  <Button type="submit" variant="outline-info" className="w-100 mb-3">{t('enter')}</Button>
+                  <Button type="submit" variant="outline-info" className="w-100 mb-3">{t('buttons.enter')}</Button>
                   {/* variant="outline-primary" */}
                   {/* {t('buttons.logIn')} */}
                 </fieldset>
@@ -141,12 +141,12 @@ const LoginPage = () => {
             </Card.Body>
             <Card.Footer className="p-4">
               <div className="text-center">
-              <span>{t('noAccount')}</span>
+              <span>{t('ui.noAccount')}</span>
               {/* <span>{t('ui.noAccount')}</span> */}
                 {/* <a href={routes.signUpPage()}>{t('ui.registration')}</a>
                 <span>{t('noAccount')}</span> */}
                 {' '}
-                <Link to={appPaths.signupPagePath()}>{t('registration')}</Link>
+                <Link to={appPaths.signupPagePath()}>{t('ui.registration')}</Link>
               </div>
             </Card.Footer>
           </Card>

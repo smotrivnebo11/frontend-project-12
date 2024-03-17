@@ -46,7 +46,7 @@ const RemoveChannel = ({ handleClose }) => {
             onClick={handleClose}
           >
             {/* {t('buttons.cancel')} */}
-            {t('cancel')}
+            {t('buttons.cancel')}
           </Button>
           <Button
             variant="danger"

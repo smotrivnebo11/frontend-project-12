@@ -93,7 +93,7 @@ const AddChannel = ({ handleClose }) => {
                 onClick={handleClose}
               >
                 {/* {t('buttons.cancel')} */}
-                {t('cancel')}
+                {t('buttons.cancel')}
               </Button>
               <Button
                 // variant="primary"
@@ -101,7 +101,7 @@ const AddChannel = ({ handleClose }) => {
                 type="submit"
               >
                 {/* {t('buttons.submit')} */}
-                {t('send')}
+                {t('buttons.send')}
               </Button>
             </div>
           </Form.Group>

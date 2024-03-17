@@ -30,8 +30,7 @@ const Error = () => {
     <div className="m-auto w-auto text-center">
       <p>{t('errors.unknown')}</p>
       <Button onClick={handleUpdate(navigate)}>
-        {t('updatePage')}
-        {/* {t('ui.updatePage')} */}
+        {t('ui.updatePage')}
       </Button>
     </div>
   );
