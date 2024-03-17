@@ -18,7 +18,7 @@ const ModalRoot = () => {
   const dispatch = useDispatch();
 
   const modalType = useSelector(selectors.getModalType);
-  const isOpen = useSelector(selectors.isModalOpen);
+  const isOpen = useSelector(selectors.isModalOpened);
 
   const handleClose = () => dispatch(actions.close());
 

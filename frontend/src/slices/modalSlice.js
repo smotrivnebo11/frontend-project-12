@@ -32,7 +32,7 @@ const modalSlice = createSlice({
 const { actions } = modalSlice;
 const selectors = {
   getModalType: (state) => state.modal.type,
-  isModalOpen: (state) => state.modal.isOpen,
+  isModalOpened: (state) => state.modal.isOpened,
   getModalContext: (state) => state.modal.context,
 };
 
