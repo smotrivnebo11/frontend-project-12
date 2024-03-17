@@ -31,7 +31,6 @@ const RenameChannel = ({ handleClose }) => {
     initialValues: {
       name: channelName,
     },
-    // validationSchema: newChannelSchema(channelsNames),
     validationSchema: newChannelSchema(channelsNames, t('modal.unique'), t('modal.lengthParams')),
     validateOnBlur: false,
     validateOnChange: false,
@@ -39,7 +38,6 @@ const RenameChannel = ({ handleClose }) => {
       try {
         const { name } = values;
         api.renameChannel(channelId, name);
-        // toast.success(t('notify.renamedChannel'));
         toast.success(t('success.renameChannel'));
         handleClose();
       } catch (error) {
@@ -50,7 +48,6 @@ const RenameChannel = ({ handleClose }) => {
 
           return;
         }
-        // toast.error(t('notify.networkError'));
         toast.error(t('errors.network'));
         rollbar.error('RenameChannel', error);
       }
@@ -61,7 +58,6 @@ const RenameChannel = ({ handleClose }) => {
     <>
       <Modal.Header closeButton>
         <Modal.Title>{t('modal.renameChannel')}</Modal.Title>
-        {/* {t('ui.renameChannel')} */}
       </Modal.Header>
       <Modal.Body>
         <Form
@@ -81,7 +77,6 @@ const RenameChannel = ({ handleClose }) => {
             <Form.Label
               visuallyHidden
             >
-              {/* {t('ui.nameChannel')} */}
               {t('modal.channelName')}
             </Form.Label>
             <Form.Control.Feedback type="invalid">
@@ -96,7 +91,6 @@ const RenameChannel = ({ handleClose }) => {
                 type="button"
                 onClick={handleClose}
               >
-                {/* {t('buttons.cancel')} */}
                 {t('buttons.cancel')}
               </Button>
               <Button
@@ -104,7 +98,6 @@ const RenameChannel = ({ handleClose }) => {
                 type="submit"
                 disabled={formik.isSubmitting}
               >
-                {/* {t('buttons.submit')} */}
                 {t('buttons.send')}
               </Button>
             </div>

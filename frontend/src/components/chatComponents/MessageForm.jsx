@@ -13,10 +13,6 @@ import { useSocket } from '../../hooks/index.js';
 import { customSelectors as channelsSelectors } from '../../slices/channelsSlice.js';
 import { chatSchema } from '../../validation/validationSchema.js';
 
-// import { ArrowRightSquareFill } from 'react-bootstrap-icons';
-
-// import { useAuth, useSocket } from '../../hooks/index.js';
-
 const MessageForm = ({ channelId }) => {
   const { t } = useTranslation();
   const api = useSocket();
@@ -43,7 +39,7 @@ const MessageForm = ({ channelId }) => {
         await api.addMessage(values.body, channelId, username);
         formik.resetForm();
       } catch (error) {
-        toast.error(t('errors.message')); // noConnection
+        toast.error(t('errors.message'));
         rollbar.error('AddChannel', error);
       } finally {
         inputRef.current.focus();
@@ -64,8 +60,6 @@ const MessageForm = ({ channelId }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name="body"
-            // aria-label={t('fields.newMessage')}
-            // placeholder={t('fields.inputMessage')}
             placeholder={t('placeholders.newMessage')}
             aria-label={t('ui.newMessage')}
             value={formik.values.body}
@@ -90,10 +84,6 @@ const MessageForm = ({ channelId }) => {
             </svg>
             <span className="visually-hidden">{t('buttons.send')}</span>
           </Button>
-          {/* <Button variant="group-vertical" type="submit" disabled={!formik.dirty || !formik.isValid}>
-            <ArrowRightSquareFill size={30} color="blue" />
-            <span className="visually-hidden">{t('send')}</span>
-          </Button> */}
         </InputGroup>
       </Form>
     </div>

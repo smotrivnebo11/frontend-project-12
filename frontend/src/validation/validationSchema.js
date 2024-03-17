@@ -44,10 +44,6 @@ const newChannelSchema = (channels, doubleMsg, lengthMsg) => yup.object().shape(
     .min(3, lengthMsg)
     .max(20, lengthMsg)
     .notOneOf(channels, doubleMsg),
-  // .required('errors.required')
-  // .min(3, 'errors.rangeLetter')
-  // .max(20, 'errors.rangeLetter')
-  // .notOneOf(channels, 'errors.notOneOf'),
 });
 
 export {

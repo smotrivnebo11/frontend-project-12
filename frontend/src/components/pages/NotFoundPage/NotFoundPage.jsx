@@ -13,14 +13,11 @@ const NotFoundPage = () => {
   return (
     <div className="text-center">
       <Image width="50%" height="50%" alt={t('pages.pageNotFound')} src={notFoundImg} fluid/>
-      {/* {t('ui.notFoundPage')} */}
       <h1 className="h4 text-muted">{t('pages.pageNotFound')}</h1>
-      {/* {t('ui.notFoundPage')} */}
       <p className="text-muted">
         {t('pages.redirect')}
         {' '}
         <Link to={appPaths.chatPagePath()}>{t('pages.mainPage')}</Link>
-        {/* {t('ui.mainPage')} */}
       </p>
     </div>
   );

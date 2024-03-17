@@ -36,8 +36,6 @@ export const customSelectors = {
   currentChannelMessages: (state) => {
     const { currentChannelId } = state.channels;
 
-    // return selectors.selectAll(state)
-    //   .filter(({ channelId }) => channelId === currentChannelId);
     const messages = selectors.selectAll(state);
     return messages.filter(({ channelId }) => channelId === currentChannelId);
   },

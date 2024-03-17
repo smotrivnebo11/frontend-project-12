@@ -8,9 +8,6 @@ const fetchData = createAsyncThunk(
   async (header, { rejectWithValue }) => {
     try {
       const res = await axios.get(apiRoutes.dataPath(), { headers: header });
-      // eslint-disable-next-line max-len
-      // const { data } = await axios.get(apiRoutes.dataPath(), { headers: { Authorization: `Bearer ${token}` } });
-      // Bearer-токен - токен на предъявителя
 
       return res.data;
     } catch (error) {

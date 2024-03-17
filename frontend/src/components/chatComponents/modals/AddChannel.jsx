@@ -29,14 +29,12 @@ const AddChannel = ({ handleClose }) => {
     initialValues: {
       name: '',
     },
-    // validationSchema: newChannelSchema(channelsName),
     validationSchema: newChannelSchema(channelsName, t('modal.unique'), t('modal.lengthParams')),
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: (values) => {
       try {
         api.addChannel(values);
-        // toast.success(t('notify.createdChannel'));
         toast.success(t('success.newChannel'));
         handleClose();
       } catch (error) {
@@ -46,7 +44,6 @@ const AddChannel = ({ handleClose }) => {
 
           return;
         }
-        // toast.error(t('notify.networkError'));
         toast.error(t('errors.network'));
         rollbar.error('AddChannel', error);
       }
@@ -57,7 +54,6 @@ const AddChannel = ({ handleClose }) => {
     <>
       <Modal.Header closeButton>
         <Modal.Title>{t('modal.add')}</Modal.Title>
-        {/* {t('ui.addChannel')} */}
       </Modal.Header>
       <Modal.Body>
         <Form
@@ -78,7 +74,6 @@ const AddChannel = ({ handleClose }) => {
               visuallyHidden
             >
               {t('modal.channelName')}
-              {/* {t('ui.nameChannel')} */}
             </Form.Label>
             <Form.Control.Feedback type="invalid">
               {t(formik.errors.name)}
@@ -92,15 +87,12 @@ const AddChannel = ({ handleClose }) => {
                 type="button"
                 onClick={handleClose}
               >
-                {/* {t('buttons.cancel')} */}
                 {t('buttons.cancel')}
               </Button>
               <Button
-                // variant="primary"
                 variant="info"
                 type="submit"
               >
-                {/* {t('buttons.submit')} */}
                 {t('buttons.send')}
               </Button>
             </div>

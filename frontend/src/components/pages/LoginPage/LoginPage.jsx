@@ -50,7 +50,6 @@ const LoginPage = () => {
       try {
         const { data } = await axios.post(apiRoutes.loginPath(), values);
         logIn(data);
-        // navigate(appPaths.chatPagePath());
         const { from } = location.state || { from: { pathname: appPaths.chatPagePath() } };
         navigate(from);
       } catch (error) {
@@ -58,7 +57,6 @@ const LoginPage = () => {
         if (error.isAxiosError) {
           if (error.code === 'ERR_NETWORK') {
             toast.error(t('errors.network'));
-            // t('notify.networkError')
             rollbar.error('LoginPage', error);
           }
           if (error.response.status === 401) {
@@ -83,12 +81,10 @@ const LoginPage = () => {
             <Card.Body className="row p-5">
               <Col xs={12} md={6} className="d-flex align-items-center justify-content-center">
                 <Image width={250} height={250} alt={t('buttons.enter')} src={loginImg} />
-                {/* alt={t('buttons.logIn')} */}
               </Col>
 
               <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
-                <h1 className="text-center mb-4">{t('enter')}</h1>
-                {/* alt={t('buttons.logIn')} */}
+                <h1 className="text-center mb-4">{t('buttons.enter')}</h1>
                 <fieldset disabled={formik.isSubmitting}>
 
                   <Form.Floating className="mb-3" controlid="floatingInput">
@@ -98,7 +94,6 @@ const LoginPage = () => {
                       type="text"
                       autoComplete="username"
                       placeholder={t('placeholders.login')}
-                      // placeholder={t('fields.nickname')}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.username}
@@ -108,7 +103,6 @@ const LoginPage = () => {
                     />
                     <Form.Label htmlFor="username">{t('placeholders.login')}</Form.Label>
                     <Form.Control.Feedback type="invalid" className="invalid-feedback">
-                    {/* tooltip={formik.errors.username && formik.touched.username} */}
                       {formik.errors.username}
                     </Form.Control.Feedback>
                   </Form.Floating>
@@ -120,7 +114,6 @@ const LoginPage = () => {
                       type="password"
                       autoComplete="password"
                       placeholder={t('placeholders.password')}
-                      // placeholder={t('fields.password')}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.password}
@@ -129,12 +122,9 @@ const LoginPage = () => {
                     />
                     <Form.Label htmlFor="password">{t('placeholders.password')}</Form.Label>
                     <Form.Control.Feedback type="invalid" className="invalid-feedback">{formik.errors.password || t('errors.invalidFeedback')}</Form.Control.Feedback>
-                    {/* {t('errors.incorrect')} */}
                   </Form.Floating>
 
                   <Button type="submit" variant="outline-info" className="w-100 mb-3">{t('buttons.enter')}</Button>
-                  {/* variant="outline-primary" */}
-                  {/* {t('buttons.logIn')} */}
                 </fieldset>
               </Form>
 
@@ -142,9 +132,6 @@ const LoginPage = () => {
             <Card.Footer className="p-4">
               <div className="text-center">
               <span>{t('ui.noAccount')}</span>
-              {/* <span>{t('ui.noAccount')}</span> */}
-                {/* <a href={routes.signUpPage()}>{t('ui.registration')}</a>
-                <span>{t('noAccount')}</span> */}
                 {' '}
                 <Link to={appPaths.signupPagePath()}>{t('ui.registration')}</Link>
               </div>

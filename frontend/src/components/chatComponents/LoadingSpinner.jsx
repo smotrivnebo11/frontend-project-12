@@ -15,9 +15,3 @@ const LoadingSpinner = () => {
 };
 
 export default LoadingSpinner;
-
-// const Loader = () => (
-//   <div className="h-100 d-flex justify-content-center align-items-center">
-//     <Spinner animation="border" variant="primary" role="status" />
-//   </div>
-// );

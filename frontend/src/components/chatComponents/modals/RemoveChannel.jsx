@@ -20,11 +20,9 @@ const RemoveChannel = ({ handleClose }) => {
   const onClick = () => {
     try {
       api.removeChannel(channelId);
-      // toast.success(t('notify.removedChannel'));
       toast.success(t('success.removeChannel'));
       handleClose();
     } catch (error) {
-      // toast.error(t('notify.networkError'));
       toast.error(t('errors.network'));
       rollbar.error('RemoveChannel', error);
     }
@@ -34,25 +32,21 @@ const RemoveChannel = ({ handleClose }) => {
     <>
       <Modal.Header closeButton>
         <Modal.Title>{t('modal.removeChannel')}</Modal.Title>
-        {/* {t('ui.removeChannel')} */}
       </Modal.Header>
       <Modal.Body>
         <p className="lead">{t('modal.confirm')}</p>
-        {/* Уверены? */}
         <div className="d-flex justify-content-end">
           <Button
             variant="secondary"
             className="me-2"
             onClick={handleClose}
           >
-            {/* {t('buttons.cancel')} */}
             {t('buttons.cancel')}
           </Button>
           <Button
             variant="danger"
             onClick={onClick}
           >
-            {/* {t('buttons.remove')} */}
             {t('modal.remove')}
           </Button>
         </div>

@@ -17,7 +17,6 @@ const MessageHeader = ({ channelName, messagesAmount }) => {
       </p>
       <span className="text-muted">
         {t('messagesCounter.messages', { count: messagesAmount })}
-        {/* ui.counter.count */}
       </span>
     </div>
   );
