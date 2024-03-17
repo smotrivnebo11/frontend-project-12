@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client';
 import { io } from 'socket.io-client';
 
 import './styles/App.scss';
+import './styles/index.css';
 import init from './init.jsx';
 
 const app = async () => {

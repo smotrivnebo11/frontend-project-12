@@ -132,7 +132,8 @@ const LoginPage = () => {
                     {/* {t('errors.incorrect')} */}
                   </Form.Floating>
 
-                  <Button type="submit" variant="outline-primary" className="w-100 mb-3">{t('enter')}</Button>
+                  <Button type="submit" variant="outline-info" className="w-100 mb-3">{t('enter')}</Button>
+                  {/* variant="outline-primary" */}
                   {/* {t('buttons.logIn')} */}
                 </fieldset>
               </Form>

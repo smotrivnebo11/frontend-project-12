@@ -13,7 +13,8 @@ const AuthButton = () => {
 
   return (
     auth.user
-      ? <Button onClick={auth.logOut} variant="primary">{t('exit')}</Button>
+      ? <Button onClick={auth.logOut} variant="info">{t('exit')}</Button>
+      // variant="primary"
       // {t('buttons.logOut')}
       : null
   );

@@ -96,7 +96,8 @@ const AddChannel = ({ handleClose }) => {
                 {t('cancel')}
               </Button>
               <Button
-                variant="primary"
+                // variant="primary"
+                variant="info"
                 type="submit"
               >
                 {/* {t('buttons.submit')} */}

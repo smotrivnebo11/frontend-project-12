@@ -1,8 +1,8 @@
-/* :root {
-  --light-blue: #b5c8f9;
+:root {
+  /* --light-blue: #b5c8f9; */
   --royal-blue: #4169E1;
   --dark-blue: #4169E17d;
-} */
+}
 
 body {
   margin: 0;
@@ -18,15 +18,20 @@ code {
     monospace;
 }
 
+/* .form-control:focus {
+  border-color: #a3d1da;
+  box-shadow: 0 0 0 0.25rem #a3d1da7d;
+} */
+
 /* .card-body {
   display: flex;
   flex-direction: row;
 } */
 
-/* .form-control:focus {
+.form-control:focus {
   border-color: var(--royal-blue);
   box-shadow: 0 0 0 0.25rem var(--dark-blue);
-} */
+}
 
 /* .btn-outline-info {
   --bs-btn-color: #0000CD;

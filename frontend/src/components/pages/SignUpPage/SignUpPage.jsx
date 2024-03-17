@@ -182,7 +182,8 @@ const SignupPage = () => {
                     {/* {t(formik.errors.confirmPassword) || t('errors.alreadyExists')} */}
                   </Form.Floating>
 
-                  <Button type="submit" variant="outline-primary" className="w-100 mb-3">{t('makeRegistration')}</Button>
+                  <Button type="submit" variant="outline-info" className="w-100 mb-3">{t('makeRegistration')}</Button>
+                  {/* variant="outline-primary" */}
                   {/* {t('buttons.register')} */}
                 </fieldset>
               </Form>

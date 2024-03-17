@@ -48,11 +48,12 @@ const Channels = ({ channels, currentChannelId }) => {
 
   const sharedClasses = {
     'w-100': true,
-    'rounded-0': true,
+    // 'rounded-0': true,
     'text-start': true,
   };
   const activeClass = (id) => ({
-    'btn-secondary': id === currentChannelId,
+    // 'btn-secondary': id === currentChannelId,
+    'btn-info': id === currentChannelId,
   });
 
   return (
@@ -61,7 +62,8 @@ const Channels = ({ channels, currentChannelId }) => {
         {/* <b>{t('ui.channels')}</b> */}
         <b>{t('channelsTitle')}</b>
         <Button
-          className="p-0 text-primary"
+          // className="p-0 text-primary"
+          className="p-0 text-info"
           variant="group-vertical"
           onClick={handleAdd}
         >
