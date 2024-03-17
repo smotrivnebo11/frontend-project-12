@@ -1,7 +1,7 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/smotrivnebo11/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/smotrivnebo11/frontend-project-12/actions)
 
-https://hexlet-chat-uftm.onrender.com
+[![Maintainability](https://api.codeclimate.com/v1/badges/8224579b847b13d3c6db/maintainability)](https://codeclimate.com/github/smotrivnebo11/frontend-project-12/maintainability)
 
 ## Hexlet Chat
 
@@ -39,7 +39,7 @@ In this chat you receive pop-up notifications of user actions, obscene words are
  ### Add channel:
   ![Add-img](frontend/src/assets/readme/add.png)
 
- ### Add channel:
+ ### Delete channel:
   ![Delete-img](frontend/src/assets/readme/delete.png)
 
  ### Chat page:
