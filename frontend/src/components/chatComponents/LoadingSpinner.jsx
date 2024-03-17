@@ -6,7 +6,7 @@ const LoadingSpinner = () => {
 
   return (
     <div className="m-auto w-auto text-center">
-      <h2 className="me-2">{t('loading')}</h2>
+      <h2 className="me-2">{t('ui.loading')}</h2>
       <Spinner variant="primary" animation="border" role="status">
         <span className="visually-hidden">{t('ui.loading')}</span>
       </Spinner>

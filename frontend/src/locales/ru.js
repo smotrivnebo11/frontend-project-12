@@ -21,7 +21,6 @@ export default {
       exist: 'Уже есть аккаунт? ',
       updatePage: 'Обновить страницу',
       loading: 'Идет загрузка...',
-
       registration: 'Регистрация',
       noAccount: 'Нет аккаунта?',
       newMessage: 'Новое сообщение',
