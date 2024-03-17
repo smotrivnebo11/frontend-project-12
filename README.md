@@ -9,7 +9,7 @@ Hexlet Chat is a simplified version of Slack, where you can send and receive mes
 
 In this chat you receive pop-up notifications of user actions, obscene words are hidden by ***. 
 
-![Chat-img](frontend/src/assets/readmepic.png)
+![Chat-img](frontend/src/assets/readme/readmepic.png)
 
 ## How to use it?
 
@@ -28,12 +28,22 @@ In this chat you receive pop-up notifications of user actions, obscene words are
 ## Demonstration
 
  ### Login page:
- ### Sign up page:
- ### Main page:
- ### Add channel:
- ### Chat page:
+ ![Login-img](frontend/src/assets/readme/login_page.png)
 
- ### Watch the demo video
+ ### Sign up page:
+  ![Signup-img](frontend/src/assets/readme/signup_page.png)
+
+ ### Main page:
+  ![Main-img](frontend/src/assets/readme/main_page.png)
+
+ ### Add channel:
+  ![Add-img](frontend/src/assets/readme/add.png)
+
+ ### Add channel:
+  ![Delete-img](frontend/src/assets/readme/delete.png)
+
+ ### Chat page:
+  ![Chat-img](frontend/src/assets/readme/chat_page.png)
 
 ## Installation
 
