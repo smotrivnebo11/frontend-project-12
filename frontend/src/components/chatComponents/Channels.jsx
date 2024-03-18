@@ -46,7 +46,7 @@ const Channels = ({ channels, currentChannelId }) => {
 
   const sharedClasses = {
     'w-100': true,
-    // 'rounded-0': true,
+    'rounded-0': true,
     'text-start': true,
   };
   const activeClass = (id) => ({
