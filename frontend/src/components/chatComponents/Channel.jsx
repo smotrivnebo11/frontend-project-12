@@ -16,7 +16,8 @@ const CloseChannel = ({
 
   return (
   <Button
-    variant="default"
+    type="button"
+    variant="variant"
     className={cn(sharedClasses, activeClass)}
     onClick={handleSelect}
   >
@@ -38,7 +39,8 @@ const OpenChannel = ({
       className="d-flex"
     >
       <Button
-        variant="default"
+        type="button"
+        variant="variant"
         className={cn(sharedClasses, activeClass, { 'text-truncate': true })}
         onClick={handleSelect}
       >
@@ -46,7 +48,8 @@ const OpenChannel = ({
         {filterProfanity(name)}
       </Button>
       <Dropdown.Toggle
-        variant="default"
+        type="button"
+        variant="variant"
         id="react-aria9230295641-1"
         className={cn(activeClass)}
       >

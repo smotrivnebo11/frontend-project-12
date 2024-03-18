@@ -50,7 +50,7 @@ const Channels = ({ channels, currentChannelId }) => {
     'text-start': true,
   };
   const activeClass = (id) => ({
-    'btn-info': id === currentChannelId,
+    'btn-secondary': id === currentChannelId,
   });
 
   return (
