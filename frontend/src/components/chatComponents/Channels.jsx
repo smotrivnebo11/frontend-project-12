@@ -44,15 +44,6 @@ const Channels = ({ channels, currentChannelId }) => {
     dispatch(modalActions.open({ type: 'removing', context }));
   };
 
-  const sharedClasses = {
-    'w-100': true,
-    'rounded-0': true,
-    'text-start': true,
-  };
-  const activeClass = (id) => ({
-    'btn-secondary': id === currentChannelId,
-  });
-
   return (
     <Col className="col-4 col-md-2 border-end px-0 flex-column h-100 d-flex bg-light">
       <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
@@ -84,7 +75,7 @@ const Channels = ({ channels, currentChannelId }) => {
       >
         {channels.map(({ id, name, removable }) => {
           const Channel = removable ? OpenChannel : CloseChannel;
-
+          console.log('name', name);
           return (
             <Nav.Item
               key={id}
@@ -93,8 +84,7 @@ const Channels = ({ channels, currentChannelId }) => {
               <Channel
                 key={id}
                 name={name}
-                sharedClasses={sharedClasses}
-                activeClass={activeClass(id)}
+                isActive={currentChannelId === id}
                 handleSelect={handleSelect(id)}
                 handleRename={handleRename(id, name)}
                 handleRemove={handleRemove(id, name)}

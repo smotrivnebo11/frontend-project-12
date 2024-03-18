@@ -6,20 +6,20 @@ import {
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import cn from 'classnames';
 import { useFilter } from '../../hooks';
 
 const CloseChannel = ({
-  name, sharedClasses, activeClass, handleSelect,
+  name, handleSelect, isActive,
 }) => {
   const filterProfanity = useFilter();
+  console.log('isActive', isActive);
 
   return (
   <Button
     type="button"
-    variant="variant"
-    className={cn(sharedClasses, activeClass)}
     onClick={handleSelect}
+    className="w-100 rounded-0 text-start text-truncate"
+    variant={isActive ? 'secondary' : null}
   >
     <span className="me-1">#</span>
     {filterProfanity(name)}
@@ -28,11 +28,11 @@ const CloseChannel = ({
 };
 
 const OpenChannel = ({
-  name, sharedClasses, activeClass, handleSelect, handleRename, handleRemove,
+  name, handleSelect, handleRename, handleRemove, isActive,
 }) => {
   const { t } = useTranslation();
   const filterProfanity = useFilter();
-
+  console.log('isActive', isActive);
   return (
     <Dropdown
       as={ButtonGroup}
@@ -40,18 +40,19 @@ const OpenChannel = ({
     >
       <Button
         type="button"
-        variant="variant"
-        className={cn(sharedClasses, activeClass, { 'text-truncate': true })}
         onClick={handleSelect}
+        className="w-100 rounded-0 text-start text-truncate"
+        variant={isActive ? 'secondary' : null}
       >
         <span className="me-1">#</span>
         {filterProfanity(name)}
       </Button>
       <Dropdown.Toggle
         type="button"
-        variant="variant"
         id="react-aria9230295641-1"
-        className={cn(activeClass)}
+        split
+        className="border-0"
+        variant={isActive ? 'secondary' : null}
       >
         <span className="visually-hidden">{t('modal.toggle')}</span>
       </Dropdown.Toggle>
