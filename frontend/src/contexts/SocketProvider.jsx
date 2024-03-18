@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { SocketContext } from './index.js';
@@ -21,29 +21,72 @@ const SocketProvider = ({ socket, children }) => {
     dispatch(channelsActions.removeChannel(id));
   });
 
-  const addMessage = async (body, channelId, username) => {
-    await socket.emit('newMessage', { body, channelId, username });
-  };
+  // const addMessage = async (body, channelId, username) => {
+  //   await socket.emit('newMessage', { body, channelId, username });
+  // };
+  const addMessage = useCallback(
+    async (body, channelId, username) => {
+      await socket.timeout(3000).emitWithAck('newMessage', { body, channelId, username });
+    },
+    [socket],
+  );
 
-  const addChannel = async (values) => {
-    const { data } = await socket.emitWithAck('newChannel', values);
-    dispatch(channelsActions.addChannel(data));
-    dispatch(channelsActions.switchChannel(data.id));
-  };
+  // const addChannel = async (values) => {
+  //   const { data } = await socket.emitWithAck('newChannel', values);
+  //   dispatch(channelsActions.addChannel(data));
+  //   dispatch(channelsActions.switchChannel(data.id));
+  // };
+  const addChannel = useCallback(
+    async (values) => {
+      const { data } = await socket.timeout(3000).emitWithAck('newChannel', values);
 
-  const renameChannel = async (id, name) => {
-    await socket.emit('renameChannel', { id, name });
-  };
+      dispatch(channelsActions.addChannel(data));
+      dispatch(channelsActions.switchChannel({ id: data.id }));
+    },
+    [socket, dispatch],
+  );
 
-  const removeChannel = async (id) => {
-    await socket.emit('removeChannel', { id });
-  };
+  // const renameChannel = async (id, name) => {
+  //   await socket.emit('renameChannel', { id, name });
+  // };
+  const renameChannel = useCallback(
+    async (id, nam) => {
+      await socket.timeout(3000).emitWithAck('renameChannel', id, nam);
+    },
+    [socket],
+  );
+
+  // const removeChannel = async (id) => {
+  //   await socket.emit('removeChannel', { id });
+  // };
+  const removeChannel = useCallback(
+    async (id) => {
+      await socket.timeout(3000).emitWithAck('removeChannel', { id });
+    },
+    [socket],
+  );
+
+  const socketContext = useMemo(
+    () => ({
+      addMessage,
+      addChannel,
+      removeChannel,
+      renameChannel,
+    }),
+    [
+      addMessage,
+      addChannel,
+      removeChannel,
+      renameChannel,
+    ],
+  );
 
   return (
-    <SocketContext.Provider value={{
-      addChannel, addMessage, renameChannel, removeChannel,
-    }}
-    >
+    // <SocketContext.Provider value={{
+    //   addChannel, addMessage, renameChannel, removeChannel,
+    // }}
+    // >
+    <SocketContext.Provider value={socketContext}>
       {children}
     </SocketContext.Provider>
   );

@@ -132,7 +132,7 @@ const LoginPage = () => {
             </Card.Body>
             <Card.Footer className="p-4">
               <div className="text-center">
-              <span>{t('ui.noAccount')}</span>
+                <span>{t('ui.noAccount')}</span>
                 {' '}
                 <Link to={appPaths.signupPagePath()}>{t('ui.registration')}</Link>
               </div>

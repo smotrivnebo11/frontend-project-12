@@ -15,15 +15,15 @@ const CloseChannel = ({
   console.log('isActive', isActive);
 
   return (
-  <Button
-    type="button"
-    onClick={handleSelect}
-    className="w-100 rounded-0 text-start text-truncate"
-    variant={isActive ? 'secondary' : null}
-  >
-    <span className="me-1">#</span>
-    {filterProfanity(name)}
-  </Button>
+    <Button
+      type="button"
+      onClick={handleSelect}
+      className="w-100 rounded-0 text-start text-truncate"
+      variant={isActive ? 'secondary' : null}
+    >
+      <span className="me-1">#</span>
+      {filterProfanity(name)}
+    </Button>
   );
 };
 
