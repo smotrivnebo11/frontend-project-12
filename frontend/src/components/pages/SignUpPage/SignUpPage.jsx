@@ -50,7 +50,7 @@ const SignupPage = () => {
     ),
 
     validateOnChange: false,
-    // validateOnBlur: false,
+    validateOnBlur: false,
 
     onSubmit: async ({ username, password }) => {
       setRegFailed(false);

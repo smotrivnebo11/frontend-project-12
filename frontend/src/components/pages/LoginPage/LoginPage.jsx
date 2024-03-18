@@ -44,6 +44,7 @@ const LoginPage = () => {
     validationSchema: loginSchema(t('errors.required')),
 
     validateOnChange: false,
+    validateOnBlur: false,
 
     onSubmit: async (values) => {
       setAuthFailed(false);
