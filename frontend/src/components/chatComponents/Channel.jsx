@@ -12,7 +12,6 @@ const CloseChannel = ({
   name, handleSelect, isActive,
 }) => {
   const filterProfanity = useFilter();
-  console.log('isActive', isActive);
 
   return (
     <Button
@@ -32,7 +31,7 @@ const OpenChannel = ({
 }) => {
   const { t } = useTranslation();
   const filterProfanity = useFilter();
-  console.log('isActive', isActive);
+
   return (
     <Dropdown
       as={ButtonGroup}
