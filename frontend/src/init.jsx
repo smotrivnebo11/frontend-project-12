@@ -1,11 +1,9 @@
 import i18next from 'i18next';
-// import io from 'socket.io-client';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider as StoreProvider } from 'react-redux';
 import { Provider as RollbarProvider, ErrorBoundary as ErrorBoundaryProvider } from '@rollbar/react';
 
 import resources from './locales/index.js';
-// import { appPaths } from './routes/routes.js';
 
 import store from './slices/store.js';
 import { actions as messagesActions } from './slices/messagesSlice.js';
@@ -17,7 +15,6 @@ import FilterProvider from './contexts/FilterProvider.jsx';
 import rollbarConfig from './rollbar/rollbarConfig.js';
 import App from './components/App.jsx';
 
-// const init = async () => {
 const init = async (socket) => {
   const i18n = i18next.createInstance();
 
@@ -28,8 +25,6 @@ const init = async (socket) => {
       lng: 'ru',
       fallbackLng: 'ru',
     });
-
-  // const socket = io(appPaths.chatPagePath(), { autoConnect: true });
 
   socket.on('newMessage', (message) => {
     store.dispatch(messagesActions.addMessage(message));

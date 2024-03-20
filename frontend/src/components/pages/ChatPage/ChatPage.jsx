@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 import { useAuth } from '../../../hooks/index.js';
-// import { useAuth, useSocket } from '../../../hooks/index.js';
 
 import fetchData from '../../../slices/fetchData.js';
 import { selectors as loadingStateSelectors, stateLoad } from '../../../slices/loadingSlice.js';
@@ -60,7 +59,6 @@ const Content = () => {
 };
 
 const ChatPage = () => {
-  // const socket = useSocket();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { getAuthHeader, logOut } = useAuth();
@@ -68,12 +66,6 @@ const ChatPage = () => {
   useEffect(() => {
     dispatch(fetchData(getAuthHeader()));
   }, [dispatch, getAuthHeader]);
-  // useEffect(() => {
-  //   dispatch(fetchData(getAuthHeader()));
-  //   socket.connectSocket();
-
-  //   return () => socket.disconnectSocket();
-  // }, [dispatch, socket, getAuthHeader]);
 
   const loadingState = useSelector(loadingStateSelectors.getStatus);
 
