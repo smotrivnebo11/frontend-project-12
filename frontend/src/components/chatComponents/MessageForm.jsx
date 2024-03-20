@@ -15,15 +15,15 @@ import { chatSchema } from '../../validation/validationSchema.js';
 
 const MessageForm = ({ channelId }) => {
   const { t } = useTranslation();
-  const api = useSocket();
+  const socket = useSocket();
   const inputRef = useRef(null);
   const rollbar = useRollbar();
 
   const currentChannel = useSelector(channelsSelectors.currentChannel);
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, [currentChannel]);
+  // useEffect(() => {
+  //   inputRef.current.focus();
+  // }, [currentChannel]);
 
   const formik = useFormik({
     initialValues: {
@@ -36,16 +36,26 @@ const MessageForm = ({ channelId }) => {
       const { username } = JSON.parse(localStorage.userId);
 
       try {
-        await api.addMessage(values.body, channelId, username);
+        await socket.addMessage(values.body, channelId, username);
         formik.resetForm();
       } catch (error) {
         toast.error(t('errors.message'));
         rollbar.error('AddChannel', error);
-      } finally {
-        inputRef.current.focus();
       }
     },
   });
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [currentChannel]);
+
+  useEffect(() => {
+    if (formik.values.body === '') {
+      inputRef.current.focus();
+    }
+  }, [formik.values.body]);
 
   return (
     <div className="mt-auto px-5 py-3">

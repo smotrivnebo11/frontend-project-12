@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "description": "Chat project",
+  "description": "Hexlet Chat is real-time messaging application. It could be utilized by several users at the same time",
   "main": "index.js",
   "scripts": {
     "build": "npm run build --prefix frontend",

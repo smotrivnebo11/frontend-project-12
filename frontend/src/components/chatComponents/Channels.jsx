@@ -75,7 +75,6 @@ const Channels = ({ channels, currentChannelId }) => {
       >
         {channels.map(({ id, name, removable }) => {
           const Channel = removable ? OpenChannel : CloseChannel;
-          console.log('name', name);
           return (
             <Nav.Item
               key={id}

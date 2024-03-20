@@ -1,7 +1,7 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/smotrivnebo11/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/smotrivnebo11/frontend-project-12/actions)
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/8224579b847b13d3c6db/maintainability)](https://codeclimate.com/github/smotrivnebo11/frontend-project-12/maintainability)
+[![MyLint](https://github.com/smotrivnebo11/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/smotrivnebo11/frontend-project-12/actions/workflows/my-linter-check.yml)
 
 ## Hexlet Chat
 
