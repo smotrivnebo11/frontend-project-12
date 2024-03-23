@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-// import React from 'react';
 import React, { useEffect } from 'react';
 import {
   Nav, Button, Col,
@@ -9,14 +8,11 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { animateScroll } from 'react-scroll';
 
-// import filter from 'leo-profanity';
-
 import { actions as channelsActions } from '../../slices/channelsSlice.js';
 import { actions as modalActions } from '../../slices/modalSlice.js';
 import { CloseChannel, OpenChannel } from './Channel.jsx';
 
 const Channels = ({ channels, currentChannelId }) => {
-  // filter.getDictionary();
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const defaultChannelId = 1;
@@ -30,29 +26,6 @@ const Channels = ({ channels, currentChannelId }) => {
       animateScroll.scrollToBottom(argument);
     }
   }, [currentChannelId, lastChannelId]);
-
-  // const refChannels = useRef(null);
-
-  // const offsetHeight = refChannels?.current?.offsetHeight;
-  // const scrollHeight = refChannels?.current?.scrollHeight;
-  // const channelOffsetHeight = document.querySelector('.btn-secondary')?.offsetHeight;
-
-  // const currentChannelIndex = channels.findIndex((channel) => channel?.id === currentChannelId);
-  // const currentChannelScrollHeight = currentChannelIndex * channelOffsetHeight;
-
-  // useEffect(() => {
-  //   if (offsetHeight < scrollHeight) {
-  //     refChannels?.current?.scrollTo(0, currentChannelScrollHeight);
-  //   }
-  // }, [currentChannelScrollHeight, offsetHeight, scrollHeight]);
-
-  // const divRef = useRef(null);
-
-  // useEffect(() => {
-  //   divRef.current
-  //     ?.lastElementChild
-  //     ?.scrollIntoView({ block: 'start', behavior: 'auto' });
-  // }, [currentChannelId, channels.length]);
 
   const handleSelect = (id) => () => {
     dispatch(channelsActions.switchChannel(id));

@@ -10,7 +10,6 @@ import { useFormik } from 'formik';
 import { useSocket, useFilter, useValidate } from '../../../hooks/index.js';
 import { customSelectors } from '../../../slices/channelsSlice.js';
 import { selectors } from '../../../slices/modalSlice.js';
-// import { newChannelSchema } from '../../../validation/validationSchema.js';
 
 const RenameChannel = ({ handleClose }) => {
   const { t } = useTranslation();

@@ -8,9 +8,7 @@ import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 
 import { useSocket, useFilter, useValidate } from '../../../hooks/index.js';
-// import { useSocket } from '../../../hooks/index.js';
 import { customSelectors } from '../../../slices/channelsSlice.js';
-// import { newChannelSchema } from '../../../validation/validationSchema.js';
 
 const AddChannel = ({ handleClose }) => {
   const { t } = useTranslation();
@@ -36,17 +34,9 @@ const AddChannel = ({ handleClose }) => {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: (values) => {
-      console.log(values);
-      // const { name } = values;
       const filteredName = filterProfanity(values.name);
-      console.log('filter', filteredName);
       try {
-        // const { name } = values;
-        // console.log('name', name);
-        // console.log('filter', filterProfanity(name));
-        // api.addChannel(filterProfanity(name));
         api.addChannel({ name: filteredName });
-        // api.addChannel(values);
         toast.success(t('success.newChannel'));
         handleClose();
       } catch (error) {

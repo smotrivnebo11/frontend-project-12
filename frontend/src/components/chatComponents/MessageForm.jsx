@@ -9,9 +9,7 @@ import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 
 import { useSocket, useFilter, useValidate } from '../../hooks/index.js';
-
 import { customSelectors as channelsSelectors } from '../../slices/channelsSlice.js';
-// import { chatSchema } from '../../validation/validationSchema.js';
 
 const MessageForm = ({ channelId }) => {
   const { t } = useTranslation();

@@ -10,7 +10,6 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import { useRollbar } from '@rollbar/react';
 
-// import { loginSchema } from '../../validation/validationSchema.js';
 import { useAuth, useValidate } from '../../hooks/index.js';
 import { apiRoutes, appPaths } from '../../routes/routes.js';
 

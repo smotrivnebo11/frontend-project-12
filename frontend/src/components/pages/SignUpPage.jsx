@@ -13,7 +13,6 @@ import { useFormik } from 'formik';
 
 import { useAuth, useValidate } from '../../hooks/index.js';
 import { apiRoutes, appPaths } from '../../routes/routes.js';
-// import { registrationSchema } from '../../validation/validationSchema.js';
 
 import signupImg from '../../assets/signupPage.jpeg';
 
@@ -43,12 +42,6 @@ const SignupPage = () => {
   const formik = useFormik({
     initialValues: { username: '', password: '', confirmPassword: '' },
 
-    // validationSchema: registrationSchema(
-    //   t('regRules.name'),
-    //   t('regRules.password'),
-    //   t('regRules.passwordEquality'),
-    //   t('errors.required'),
-    // ),
     validationSchema: registrationSchema(t),
 
     validateOnChange: false,
@@ -94,7 +87,6 @@ const SignupPage = () => {
 
               <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
                 <h1 className="text-center mb-4">{t('ui.registration')}</h1>
-                {/* {t('ui.registration')} */}
                 <fieldset disabled={formik.isSubmitting}>
 
                   <Form.Floating className="mb-3" controlid="floatingInput">

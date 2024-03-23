@@ -4,7 +4,6 @@ import { Container, Row, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-// import { animateScroll } from 'react-scroll';
 
 import { useAuth } from '../../hooks/index.js';
 
@@ -41,13 +40,6 @@ const Content = () => {
   const channels = useSelector(channelsSelectors.allChannels);
   const currentChannel = useSelector(channelsSelectors.currentChannel);
   const currentChannelMessages = useSelector(messagesSelectors.currentChannelMessages);
-
-  // useEffect(() => {
-  //   const argument = { containerId: 'messages-box', delay: 0, duration: 0 };
-  //   animateScroll.scrollToBottom(argument);
-  // }, [currentChannelMessages.length]);
-
-  console.log(currentChannel);
 
   switch (loadingState) {
     case stateLoad.success:
