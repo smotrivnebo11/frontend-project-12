@@ -7,7 +7,7 @@ import { useRollbar } from '@rollbar/react';
 
 import { useFormik } from 'formik';
 
-import { useSocket } from '../../../hooks/index.js';
+import { useSocket, useFilter } from '../../../hooks/index.js';
 import { customSelectors } from '../../../slices/channelsSlice.js';
 import { selectors } from '../../../slices/modalSlice.js';
 import { newChannelSchema } from '../../../validation/validationSchema.js';
@@ -16,6 +16,7 @@ const RenameChannel = ({ handleClose }) => {
   const { t } = useTranslation();
   const api = useSocket();
   const rollbar = useRollbar();
+  const filterProfanity = useFilter();
 
   const inputRef = useRef(null);
 
@@ -31,13 +32,14 @@ const RenameChannel = ({ handleClose }) => {
     initialValues: {
       name: channelName,
     },
-    validationSchema: newChannelSchema(channelsNames, t('modal.unique'), t('modal.lengthParams')),
+    validationSchema: newChannelSchema(channelsNames, t),
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: (values) => {
+      const { name } = values;
+      const filteredRename = filterProfanity(name);
       try {
-        const { name } = values;
-        api.renameChannel(channelId, name);
+        api.renameChannel(channelId, filteredRename);
         toast.success(t('success.renameChannel'));
         handleClose();
       } catch (error) {

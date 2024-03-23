@@ -4,7 +4,6 @@ export const appPaths = {
   signupPagePath: () => '/signup',
   loginPagePath: () => '/login',
   chatPagePath: () => '/',
-  notFoundPath: () => '*',
 };
 
 export const apiRoutes = {

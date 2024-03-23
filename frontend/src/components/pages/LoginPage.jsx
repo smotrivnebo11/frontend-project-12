@@ -10,11 +10,11 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import { useRollbar } from '@rollbar/react';
 
-import { loginSchema } from '../../../validation/validationSchema.js';
-import { useAuth } from '../../../hooks/index.js';
-import { apiRoutes, appPaths } from '../../../routes/routes.js';
+import { loginSchema } from '../../validation/validationSchema.js';
+import { useAuth } from '../../hooks/index.js';
+import { apiRoutes, appPaths } from '../../routes/routes.js';
 
-import loginImg from '../../../assets/loginPage.jpeg';
+import loginImg from '../../assets/loginPage.jpeg';
 
 const LoginPage = () => {
   const { t } = useTranslation();
@@ -41,7 +41,7 @@ const LoginPage = () => {
   const formik = useFormik({
     initialValues: { username: '', password: '' },
 
-    validationSchema: loginSchema(t('errors.required')),
+    validationSchema: loginSchema(t),
 
     validateOnChange: false,
     validateOnBlur: false,

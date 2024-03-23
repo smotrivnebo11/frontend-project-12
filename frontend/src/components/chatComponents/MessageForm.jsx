@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 import { useFormik } from 'formik';
 
-import { useSocket } from '../../hooks/index.js';
+import { useSocket, useFilter } from '../../hooks/index.js';
 
 import { customSelectors as channelsSelectors } from '../../slices/channelsSlice.js';
 import { chatSchema } from '../../validation/validationSchema.js';
@@ -18,6 +18,7 @@ const MessageForm = ({ channelId }) => {
   const socket = useSocket();
   const inputRef = useRef(null);
   const rollbar = useRollbar();
+  const filterProfanity = useFilter();
 
   const currentChannel = useSelector(channelsSelectors.currentChannel);
 
@@ -25,14 +26,14 @@ const MessageForm = ({ channelId }) => {
     initialValues: {
       body: '',
     },
-    validationSchema: chatSchema(t('errors.messageBody')),
+    validationSchema: chatSchema(t),
     validateOnBlur: false,
     validateOnMount: true,
     onSubmit: async (values) => {
       const { username } = JSON.parse(localStorage.userId);
-
+      const filteredMessage = filterProfanity(values.body);
       try {
-        await socket.addMessage(values.body, channelId, username);
+        await socket.addMessage(filteredMessage, channelId, username);
         formik.resetForm();
       } catch (error) {
         toast.error(t('errors.message'));

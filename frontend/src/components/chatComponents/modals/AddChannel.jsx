@@ -7,7 +7,8 @@ import { toast } from 'react-toastify';
 
 import { useFormik } from 'formik';
 
-import { useSocket } from '../../../hooks/index.js';
+import { useSocket, useFilter } from '../../../hooks/index.js';
+// import { useSocket } from '../../../hooks/index.js';
 import { customSelectors } from '../../../slices/channelsSlice.js';
 import { newChannelSchema } from '../../../validation/validationSchema.js';
 
@@ -15,6 +16,7 @@ const AddChannel = ({ handleClose }) => {
   const { t } = useTranslation();
   const api = useSocket();
   const rollbar = useRollbar();
+  const filterProfanity = useFilter();
 
   const inputRef = useRef(null);
 
@@ -29,12 +31,21 @@ const AddChannel = ({ handleClose }) => {
     initialValues: {
       name: '',
     },
-    validationSchema: newChannelSchema(channelsName, t('modal.unique'), t('modal.lengthParams')),
+    validationSchema: newChannelSchema(channelsName, t),
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: (values) => {
+      console.log(values);
+      // const { name } = values;
+      const filteredName = filterProfanity(values.name);
+      console.log('filter', filteredName);
       try {
-        api.addChannel(values);
+        // const { name } = values;
+        // console.log('name', name);
+        // console.log('filter', filterProfanity(name));
+        // api.addChannel(filterProfanity(name));
+        api.addChannel({ name: filteredName });
+        // api.addChannel(values);
         toast.success(t('success.newChannel'));
         handleClose();
       } catch (error) {

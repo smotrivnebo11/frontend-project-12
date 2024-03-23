@@ -11,11 +11,11 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useFormik } from 'formik';
 
-import { useAuth } from '../../../hooks/index.js';
-import { apiRoutes, appPaths } from '../../../routes/routes.js';
-import { registrationSchema } from '../../../validation/validationSchema.js';
+import { useAuth } from '../../hooks/index.js';
+import { apiRoutes, appPaths } from '../../routes/routes.js';
+import { registrationSchema } from '../../validation/validationSchema.js';
 
-import signupImg from '../../../assets/signupPage.jpeg';
+import signupImg from '../../assets/signupPage.jpeg';
 
 const SignupPage = () => {
   const { t } = useTranslation();
@@ -42,12 +42,13 @@ const SignupPage = () => {
   const formik = useFormik({
     initialValues: { username: '', password: '', confirmPassword: '' },
 
-    validationSchema: registrationSchema(
-      t('regRules.name'),
-      t('regRules.password'),
-      t('regRules.passwordEquality'),
-      t('errors.required'),
-    ),
+    // validationSchema: registrationSchema(
+    //   t('regRules.name'),
+    //   t('regRules.password'),
+    //   t('regRules.passwordEquality'),
+    //   t('errors.required'),
+    // ),
+    validationSchema: registrationSchema(t),
 
     validateOnChange: false,
     validateOnBlur: false,

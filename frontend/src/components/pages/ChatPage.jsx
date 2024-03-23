@@ -4,18 +4,19 @@ import { Container, Row, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+// import { animateScroll } from 'react-scroll';
 
-import { useAuth } from '../../../hooks/index.js';
+import { useAuth } from '../../hooks/index.js';
 
-import fetchData from '../../../slices/fetchData.js';
-import { selectors as loadingStateSelectors, stateLoad } from '../../../slices/loadingSlice.js';
-import { customSelectors as channelsSelectors } from '../../../slices/channelsSlice.js';
-import { customSelectors as messagesSelectors } from '../../../slices/messagesSlice.js';
+import fetchData from '../../slices/fetchData.js';
+import { selectors as loadingStateSelectors, stateLoad } from '../../slices/loadingSlice.js';
+import { customSelectors as channelsSelectors } from '../../slices/channelsSlice.js';
+import { customSelectors as messagesSelectors } from '../../slices/messagesSlice.js';
 
-import Channels from '../../chatComponents/Channels.jsx';
-import Messages from '../../chatComponents/Messages.jsx';
-import Modal from '../../chatComponents/modals/index.jsx';
-import LoadingSpinner from '../../chatComponents/LoadingSpinner.jsx';
+import Channels from '../chatComponents/Channels.jsx';
+import Messages from '../chatComponents/Messages.jsx';
+import Modal from '../chatComponents/modals/index.jsx';
+import LoadingSpinner from '../chatComponents/LoadingSpinner.jsx';
 
 const handleUpdate = (navigate) => () => {
   navigate(0);
@@ -40,6 +41,13 @@ const Content = () => {
   const channels = useSelector(channelsSelectors.allChannels);
   const currentChannel = useSelector(channelsSelectors.currentChannel);
   const currentChannelMessages = useSelector(messagesSelectors.currentChannelMessages);
+
+  // useEffect(() => {
+  //   const argument = { containerId: 'messages-box', delay: 0, duration: 0 };
+  //   animateScroll.scrollToBottom(argument);
+  // }, [currentChannelMessages.length]);
+
+  console.log(currentChannel);
 
   switch (loadingState) {
     case stateLoad.success:

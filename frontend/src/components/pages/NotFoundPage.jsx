@@ -3,9 +3,9 @@ import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { appPaths } from '../../../routes/routes.js';
+import { appPaths } from '../../routes/routes.js';
 
-import notFoundImg from '../../../assets/notFound.jpeg';
+import notFoundImg from '../../assets/notFound.jpeg';
 
 const NotFoundPage = () => {
   const { t } = useTranslation();
