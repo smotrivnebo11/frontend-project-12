@@ -12,6 +12,7 @@ import { actions as channelsActions } from './slices/channelsSlice.js';
 import AuthProvider from './contexts/AuthProvider.jsx';
 import SocketProvider from './contexts/SocketProvider.jsx';
 import FilterProvider from './contexts/FilterProvider.jsx';
+import ValidateProvider from './contexts/ValidateProvider.jsx';
 import rollbarConfig from './rollbar/rollbarConfig.js';
 import App from './components/App.jsx';
 
@@ -43,15 +44,17 @@ const init = async (socket) => {
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundaryProvider>
         <I18nextProvider i18n={i18n}>
-          <StoreProvider store={store}>
-            <AuthProvider>
-              <FilterProvider>
-                <SocketProvider socket={socket}>
-                  <App />
-                </SocketProvider>
-              </FilterProvider>
-            </AuthProvider>
-          </StoreProvider>
+          <ValidateProvider>
+            <StoreProvider store={store}>
+              <AuthProvider>
+                <FilterProvider>
+                  <SocketProvider socket={socket}>
+                    <App />
+                  </SocketProvider>
+                </FilterProvider>
+              </AuthProvider>
+            </StoreProvider>
+          </ValidateProvider>
         </I18nextProvider>
       </ErrorBoundaryProvider>
     </RollbarProvider>

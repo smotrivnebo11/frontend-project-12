@@ -11,9 +11,9 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useFormik } from 'formik';
 
-import { useAuth } from '../../hooks/index.js';
+import { useAuth, useValidate } from '../../hooks/index.js';
 import { apiRoutes, appPaths } from '../../routes/routes.js';
-import { registrationSchema } from '../../validation/validationSchema.js';
+// import { registrationSchema } from '../../validation/validationSchema.js';
 
 import signupImg from '../../assets/signupPage.jpeg';
 
@@ -23,6 +23,7 @@ const SignupPage = () => {
   const rollbar = useRollbar();
   const navigate = useNavigate();
   const location = useLocation();
+  const { registrationSchema } = useValidate();
 
   const [regFailed, setRegFailed] = useState(false);
   const inputName = useRef(null);

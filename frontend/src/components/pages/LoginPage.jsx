@@ -10,8 +10,8 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import { useRollbar } from '@rollbar/react';
 
-import { loginSchema } from '../../validation/validationSchema.js';
-import { useAuth } from '../../hooks/index.js';
+// import { loginSchema } from '../../validation/validationSchema.js';
+import { useAuth, useValidate } from '../../hooks/index.js';
 import { apiRoutes, appPaths } from '../../routes/routes.js';
 
 import loginImg from '../../assets/loginPage.jpeg';
@@ -22,6 +22,7 @@ const LoginPage = () => {
   const rollbar = useRollbar();
   const location = useLocation();
   const navigate = useNavigate();
+  const { loginSchema } = useValidate();
 
   const [authFailed, setAuthFailed] = useState(false);
   const inputName = useRef(null);

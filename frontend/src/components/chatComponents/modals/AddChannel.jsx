@@ -7,16 +7,17 @@ import { toast } from 'react-toastify';
 
 import { useFormik } from 'formik';
 
-import { useSocket, useFilter } from '../../../hooks/index.js';
+import { useSocket, useFilter, useValidate } from '../../../hooks/index.js';
 // import { useSocket } from '../../../hooks/index.js';
 import { customSelectors } from '../../../slices/channelsSlice.js';
-import { newChannelSchema } from '../../../validation/validationSchema.js';
+// import { newChannelSchema } from '../../../validation/validationSchema.js';
 
 const AddChannel = ({ handleClose }) => {
   const { t } = useTranslation();
   const api = useSocket();
   const rollbar = useRollbar();
   const filterProfanity = useFilter();
+  const { newChannelSchema } = useValidate();
 
   const inputRef = useRef(null);
 

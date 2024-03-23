@@ -1,9 +1,9 @@
 import { createContext } from 'react';
 
-const AuthContext = createContext({});
+export const AuthContext = createContext({});
 
-const SocketContext = createContext({});
-
-export { AuthContext, SocketContext };
+export const SocketContext = createContext({});
 
 export const FilterContext = createContext({});
+
+export const ValidateContext = createContext({});

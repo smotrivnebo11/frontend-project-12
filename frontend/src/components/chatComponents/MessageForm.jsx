@@ -8,10 +8,10 @@ import { toast } from 'react-toastify';
 
 import { useFormik } from 'formik';
 
-import { useSocket, useFilter } from '../../hooks/index.js';
+import { useSocket, useFilter, useValidate } from '../../hooks/index.js';
 
 import { customSelectors as channelsSelectors } from '../../slices/channelsSlice.js';
-import { chatSchema } from '../../validation/validationSchema.js';
+// import { chatSchema } from '../../validation/validationSchema.js';
 
 const MessageForm = ({ channelId }) => {
   const { t } = useTranslation();
@@ -19,6 +19,7 @@ const MessageForm = ({ channelId }) => {
   const inputRef = useRef(null);
   const rollbar = useRollbar();
   const filterProfanity = useFilter();
+  const { chatSchema } = useValidate();
 
   const currentChannel = useSelector(channelsSelectors.currentChannel);
 
